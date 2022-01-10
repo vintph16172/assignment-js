@@ -1,13 +1,26 @@
-const menuList = ["menu 1","menu 2","menu 3"];
+import Navigo from "navigo";
+import HomePage from "./pages/home";
+import AboutPage from "./pages/about";
+import ProductPage from "./pages/product";
 
-var menuElement = document.querySelector("#menu");
+const router = new Navigo("/" , {linksSelector: "a"});
 
-if(menuElement){
-    for(let i = 0; i < menuList.length; i++){
-        menuElement.innerHTML += `<li>${menuList[i]}</li>`;
-    }
+const print = (content) =>{
+    document.querySelector("#app").innerHTML = content;
     
 }
 
-
-
+router.on({
+    "/": () => {
+        print(HomePage.render());
+    },
+    "/about": () => {
+        print(AboutPage.render());
+        
+    },
+    "/product": () => {
+        print(ProductPage.render());
+    },
+})
+router.notFound( () => {print("Not Found Page")} );
+router.resolve();
