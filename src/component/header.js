@@ -3,7 +3,7 @@ const HeaderPage = {
         return /*html*/`
         <div class="header-top flex flex-wrap justify-center bg-lab1-blue ">
             <div class="">
-                <img src="../img/logo lab1.png" alt="" class="py-6 max-w-full">
+                <img src="../../img/logo lab1.png" alt="" class="py-6 max-w-full">
             </div>
         </div>
         <div class="header-main md:flex flex-wrap bg-lab1-orange ">
