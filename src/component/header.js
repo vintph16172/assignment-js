@@ -13,7 +13,7 @@ const HeaderPage = {
                 <li class="md:inline-block text-center py-4 px-4 text-white hover:text-lab1-blue"><a href="/about">Tuyển Sinh</a></li>
                 <li class="md:inline-block text-center py-4 px-4 text-white hover:text-lab1-blue"><a href="/product">Chương Trình Đào Tạo</a></li>
                 <li class="md:inline-block text-center py-4 px-4 text-white hover:text-lab1-blue"><a href="">Góc Sinh Viên</a></li>
-                <li class="md:inline-block text-center py-4 px-4 text-white hover:text-lab1-blue"><a href="">Tuyển Dụng</a></li>
+                <li class="md:inline-block text-center py-4 px-4 text-white hover:text-lab1-blue"><a href="/admin/dashbroad">Dashbroad</a></li>
                 
                 </ul>
             </div>
