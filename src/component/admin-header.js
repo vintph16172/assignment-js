@@ -6,7 +6,7 @@ const AdminHeader = {
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                 <div class="flex-shrink-0 ">
-                    <img class="h-8 w-28" src="../../img/1200px-FPT-Polytechnic.png" alt="Workflow">
+                    <img class="h-8 w-28" src="/img/1200px-FPT-Polytechnic.png" alt="Workflow">
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-8 flex items-baseline space-x-4">
