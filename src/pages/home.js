@@ -5,7 +5,7 @@ const HomePage = {
     render(){
         return /*html*/`
         <div class="banner mt-4">
-            <img src="./img/banner lab1.png" alt="" class="w-full">
+            <img src="../../img/banner lab1.png" alt="" class="w-full">
         </div>
 
         <div class="content">
