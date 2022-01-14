@@ -1,9 +1,12 @@
 import News from "../component/news";
-
+import HeaderPage from "../component/header";
+import FooterPage from "../component/footer";
 
 const HomePage = {
     render(){
         return /*html*/`
+        ${HeaderPage.render()}
+
         <div class="banner mt-4">
             <img src="/img/banner lab1.png" alt="" class="w-full">
         </div>
@@ -17,6 +20,7 @@ const HomePage = {
 
         </div>
         
+        ${FooterPage.render()}
         
         `;
     }
