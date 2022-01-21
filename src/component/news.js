@@ -1,8 +1,12 @@
-import data from "../data";
+
+import axios from "axios";
+import {  getAll } from "../api/post"
 
 const News = {
-    render() {
-        return /* html */`
+    async render() {
+            const { data } = await getAll();
+         return /* html */`
+           
             <h1 class="text-lab1-blue text-2xl  font-bold mt-6" >TIN TỨC HỌC TẬP</h1>
 
             <div class="md:grid grid-cols-3 gap-x-8">

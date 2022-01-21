@@ -18,49 +18,51 @@ import AdminNewsEdit from "./pages/admin/news/admin-news-edit";
 
 const router = new Navigo("/" , {linksSelector: "a"});
 
-const print = (content) =>{
-    document.querySelector("#content").innerHTML = content;
-    
-}
+const print = async (content, id = "") => {
+    document.getElementById("content").innerHTML = await content.render(id);
+    if(content.afterRender) content.afterRender();
+};
+
+
 
 
 router.on({
     "/": () => {
-        print(HomePage.render());
+        print(HomePage);
         
     },
     "/about": () => {
-        print(AboutPage.render());
+        print(AboutPage);
         
     },
     "/product": () => {
-        print(ProductPage.render());
+        print(ProductPage);
         
     },
     "/news/:id": (value) =>{
         console.log(value.data.id);
-        print(DetailNewsPage.render(value.data.id));
+        print(DetailNewsPage,value.data.id);
         
     },
     "/signup": () => {
-        print(SignUpPage.render());
+        print(SignUpPage);
         
     },
     "/signin": () => {
-        print(SignInPage.render());
+        print(SignInPage);
         
     },
     "/admin/dashbroad": () => {
-        print(AdminPage.render());
+        print(AdminPage);
     },
     "/admin/news": () => {
-        print(AdminNews.render());
+        print(AdminNews);
     },
     "/admin/news/add": () => {
-        print(AdminNewsAdd.render());
+        print(AdminNewsAdd);
     },
     "/admin/news/:id/edit": (value) => {
-        print(AdminNewsEdit.render(value.data.id));
+        print(AdminNewsEdit,value.data.id);
     },
 
     

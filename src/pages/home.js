@@ -3,7 +3,7 @@ import HeaderPage from "../component/header";
 import FooterPage from "../component/footer";
 
 const HomePage = {
-    render(){
+    async render(){
         return /*html*/`
         ${HeaderPage.render()}
 
@@ -13,7 +13,7 @@ const HomePage = {
 
         <div class="content">
             <div class="content1">
-              ${News.render()}
+              ${await News.render()}
             </div>
 
             
