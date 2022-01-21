@@ -1,5 +1,5 @@
 import AdminHeader from "../../../component/admin-header";
-
+import { add } from "../../../api/post"
 
 const AdminNewsAdd = {
     render() {
@@ -21,7 +21,7 @@ const AdminNewsAdd = {
                     <div class="mt-10 sm:mt-0">
                         <div class="md:grid md:grid-cols-2 md:gap-6">
                             <div class="mt-5 md:mt-0 md:col-span-2">
-                                <form action="#" method="POST">
+                                <form action="#" id="form-add">
                                     <div class="shadow overflow-hidden sm:rounded-md">
                                         <div class="px-4 py-5 bg-white sm:p-6">
                                             <div class="grid grid-cols-6 gap-6">
@@ -95,6 +95,19 @@ const AdminNewsAdd = {
         
         
         `;
+    },
+
+    afterRender(){
+        const formAdd = document.querySelector("#form-add");
+        formAdd.addEventListener("submit",(b) =>{
+            b.preventDefault();
+            console.log("submited");
+            add({
+                title: "vintph16172",
+                img: "http://placeimg.com/640/480/cats",
+                desc: "Mô tả bài viết",
+              });
+        })
     }
 
 }

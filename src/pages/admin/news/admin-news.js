@@ -1,7 +1,10 @@
-import data from "../../../data";
+
 import AdminHeader from "../../../component/admin-header";
+import {  getAll } from "../../../api/post";
+
 const AdminNews = {
-    render(){
+    async render(){
+        const { data } = await getAll();
         return /*html*/`
         ${AdminHeader.render()}
         
