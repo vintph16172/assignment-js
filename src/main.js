@@ -20,7 +20,7 @@ const router = new Navigo("/" , {linksSelector: "a"});
 
 const print = async (content, id = "") => {
     document.getElementById("content").innerHTML = await content.render(id);
-    if(content.afterRender) content.afterRender();
+    if(content.afterRender) content.afterRender(id);
 };
 
 

@@ -1,11 +1,14 @@
 
 import AdminHeader from "../../../component/admin-header";
-import { get } from "../../../api/post";
+import { get,update } from "../../../api/post";
 
 
 const AdminNewsEdit = {
+    
     async render(id) {
+        
         const { data } = await get(id);
+       
         return /*html*/`
         ${AdminHeader.render()}
         
@@ -30,12 +33,12 @@ const AdminNewsEdit = {
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="first-name" class="block text-sm font-medium text-gray-700">Tiêu Đề:</label>
-                                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md" value="${data.title}">
+                                                    <input type="text" name="first-name" id="post-title" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md" value="${data.title}">
                                                 </div>
                                 
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="first-name" class="block text-sm font-medium text-gray-700">Ngày Đăng:</label>
-                                                    <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md" value="${data.createdAt}">
+                                                    <input type="text" name="first-name" id="post-createtime" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md" value="${data.createdAt}">
                                                 </div>
                                 
                                                 
@@ -53,7 +56,7 @@ const AdminNewsEdit = {
                                                             <div class="flex text-sm text-gray-600">
                                                                 <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                                 <span>Upload a file</span>
-                                                                <input id="file-upload" name="file-upload" type="file" class="sr-only">
+                                                                <input id="post-image" name="file-upload" type="file" class="sr-only">
                                                                 </label>
                                                                 <p class="pl-1">or drag and drop</p>
                                                             </div>
@@ -69,7 +72,7 @@ const AdminNewsEdit = {
                                                         Nội Dung:
                                                     </label>
                                                     <div class="mt-1">
-                                                        <textarea id="about" name="about" rows="3" class="h-32 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="..." >${data.desc}</textarea>
+                                                        <textarea id="post-detail" name="about" rows="3" class="h-32 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="..."  >${data.desc}</textarea>
                                                     </div>
                                                     
                                                 </div>
@@ -97,19 +100,25 @@ const AdminNewsEdit = {
         
         
         `;
+        
     },
-    afterRender(){
-        const formAdd = document.querySelector("#form-update");
-        formAdd.addEventListener("submit",(b) =>{
-            b.preventDefault();
-            console.log("submited");
-            add({
-                title: "vintph16172",
-                img: "http://placeimg.com/640/480/cats",
-                desc: "Mô tả bài viết",
-              });
-        })
+    afterRender(id) {
+        
+        const formEdit = document.querySelector("#form-update");
+        formEdit.addEventListener("submit", (e) => {
+          e.preventDefault();
+          update({
+            id: id,
+            title: document.querySelector('#post-title').value,
+            img: "http://placeimg.com/640/480/fashion",
+            desc:document.querySelector('#post-detail').value
+          });
+          console.log('update success');
+          
+        });
+        
     }
+    
 
 }
 export default AdminNewsEdit;
