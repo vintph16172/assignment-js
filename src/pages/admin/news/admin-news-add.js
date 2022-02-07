@@ -1,5 +1,7 @@
 import AdminHeader from "../../../component/admin-header";
-import { add } from "../../../api/post"
+import axios from "axios";
+import { add } from "../../../api/post";
+
 
 const AdminNewsAdd = {
     render() {
@@ -60,7 +62,7 @@ const AdminNewsAdd = {
                                                             </p>
                                                     </div>
                                                 </div>
-
+                                                
                                 
                                                 <div class="col-span-6 sm:col-span-6">
                                                     <label for="about" class="block text-sm font-medium text-gray-700">
@@ -71,6 +73,7 @@ const AdminNewsAdd = {
                                                     </div>
                                                     
                                                 </div>
+                                                <input id="post-image2"  type="file" >
 
                                                 
 
@@ -99,16 +102,44 @@ const AdminNewsAdd = {
 
     afterRender(){
         const formAdd = document.querySelector("#form-add");
-        formAdd.addEventListener("submit",(b) =>{
-            b.preventDefault();
-            console.log("submited");
-            add({
-                title: document.querySelector('#post-title').value,
-                img: "http://placeimg.com/640/480/fashion",
-                
-                desc:document.querySelector('#post-detail').value
-              });
-        })
+        const imgPost = document.querySelector('#post-image2');
+
+        imgPost.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
+      
+            const formData = new FormData();
+      
+            formData.append('file', file);
+            formData.append('upload_preset', "ypn4yccr");
+      
+            // call api cloudinary
+          
+            const response = await axios.post(CLOUDINARY_API, formData, {
+              headers: {
+                "Content-Type": "application/form-data"
+              }
+            });
+            console.log(response.data.url);
+      
+      
+            formAdd.addEventListener("submit",(b) =>{
+                b.preventDefault();
+                console.log("submited");
+                add({
+                    title: document.querySelector('#post-title').value,
+                    img: response.data.url,
+                    
+                    desc:document.querySelector('#post-detail').value
+                  });
+            })
+          });
+
+            
+
+
+
+        
     }
 
 }

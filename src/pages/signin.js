@@ -1,5 +1,10 @@
+import { signin } from "../api/user";
+
 const SignInPage = {
     render(){
+        
+
+
         return /*html*/`
         <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
             <div class="max-w-md w-full space-y-8">
@@ -18,16 +23,16 @@ const SignInPage = {
                         </a>
                     </p>
                 </div>
-                <form class="mt-8 space-y-6" action="#" method="POST">
+                <form class="mt-8 space-y-6" action="#" method="" id="form-signin">
                     <input type="hidden" name="remember" value="true">
                     <div class="rounded-md shadow-sm -space-y-px">
                         <div>
-                        <label for="email-address" class="sr-only">Email address</label>
-                        <input id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] focus:z-10 sm:text-sm" placeholder="Email...">
+                            <label for="email-address" class="sr-only">Email address</label>
+                            <input id="email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] focus:z-10 sm:text-sm" placeholder="Email..."  >
                         </div>
                         <div>
-                        <label for="password" class="sr-only">Password</label>
-                        <input id="password" name="password" type="password" autocomplete="current-password" required class="mt-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] focus:z-10 sm:text-sm" placeholder="Mật Khẩu...">
+                            <label for="password" class="sr-only">Password</label>
+                            <input id="password" name="password" type="password" autocomplete="current-password" required class="mt-2 appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] focus:z-10 sm:text-sm" placeholder="Mật Khẩu..." >
                         </div>
                     </div>
 
@@ -43,6 +48,11 @@ const SignInPage = {
                         <a href="#" class="font-medium text-[#0066B3] hover:text-[#F26F1B]">
                             Quên mật khẩu?
                         </a>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                        <span id="alert"></span>
                         </div>
                     </div>
 
@@ -63,6 +73,50 @@ const SignInPage = {
         
         
         `;
+    },
+    afterRender(){
+
+        const email = document.querySelector('#email');   
+        const password = document.querySelector('#password');  
+        const remember = document.querySelector('#remember-me');
+
+        if((localStorage.getItem("email"))&&(localStorage.getItem("password"))){
+            email.value = localStorage.getItem("email");
+            password.value = localStorage.getItem("password");
+           
+        }else{
+            email = "";
+            password = "";
+        }
+
+        const formSignin = document.querySelector('#form-signin');
+        formSignin.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            try {
+                const response = await signin({
+                    email: email.value,
+                    password: password.value,
+                });
+                console.log(response);
+                alert("Đăng Nhập Thành Công!")
+                if(remember.checked){
+                    localStorage.setItem("email", email.value);
+                    localStorage.setItem("password", password.value);
+                }
+                
+
+            } catch (error) {
+                console.log(error.response.data);
+                document.querySelector('#alert').innerHTML="Mời Bạn Nhập Lại!";
+            
+                if(error.response.data === "Cannot find user"){
+                    email.classList.add("border-red-500");
+                }else{
+                    password.classList.add("border-red-500");
+                }
+                
+            }
+        });
     }
 
 

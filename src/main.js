@@ -10,10 +10,11 @@ import AdminPage from "./pages/admin/admin-dashbroad";
 import AdminNews from "./pages/admin/news/admin-news";
 import AdminNewsAdd from "./pages/admin/news/admin-news-add";
 import AdminNewsEdit from "./pages/admin/news/admin-news-edit";
+
 // -----BACK-END-------
 
 // **********************PAGE********************
-
+import Cart from "./component/cart";
 
 
 const router = new Navigo("/" , {linksSelector: "a"});
@@ -50,6 +51,10 @@ router.on({
     },
     "/signin": () => {
         print(SignInPage);
+        
+    },
+    "/profile": () => {
+        print(Cart);
         
     },
     "/admin/dashbroad": () => {
