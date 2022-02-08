@@ -58,8 +58,8 @@ const AdminNews = {
                                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Create Time
                                                         </th>
-                                                        <th scope="col" class="relative px-6 py-3">
-                                                            <span class="sr-only">Edit</span>
+                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Edit
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -143,7 +143,9 @@ const AdminNews = {
                 const confirm = window.confirm("Bạn có muốn xóa hay không?");
                 if(confirm){
                   remove(id).then(() => console.log('Bạn đã xóa thành công'))
+                //   this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);
                 }
+                
             });
         });
     },

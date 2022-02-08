@@ -2,6 +2,7 @@
 import HeaderPage from "../component/header";
 import FooterPage from "../component/footer";
 import axios from "axios";
+import Cart from "../component/cart";
 import {  get } from "../api/post"
 
 const DetailNewsPage = {
@@ -17,7 +18,11 @@ const DetailNewsPage = {
         ${FooterPage.render()}
 
         `;
+    },
+    afterRender(){
+        Cart.afterRender()
     }
+    
 
 
 

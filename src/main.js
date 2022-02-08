@@ -14,7 +14,7 @@ import AdminNewsEdit from "./pages/admin/news/admin-news-edit";
 // -----BACK-END-------
 
 // **********************PAGE********************
-import Cart from "./component/cart";
+
 
 
 const router = new Navigo("/" , {linksSelector: "a"});
@@ -54,7 +54,7 @@ router.on({
         
     },
     "/profile": () => {
-        print(Cart);
+        print();
         
     },
     "/admin/dashbroad": () => {

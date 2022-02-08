@@ -1,6 +1,7 @@
 import News from "../component/news";
 import HeaderPage from "../component/header";
 import FooterPage from "../component/footer";
+import Cart from "../component/cart";
 
 const HomePage = {
     async render(){
@@ -23,6 +24,10 @@ const HomePage = {
         ${FooterPage.render()}
         
         `;
+    },
+    afterRender(){
+        Cart.afterRender()
     }
+
 }
 export default HomePage;
