@@ -5,6 +5,7 @@ import ProductPage from "./pages/product";
 import DetailNewsPage from "./pages/detailNews";
 import SignUpPage from "./pages/signup";
 import SignInPage from "./pages/signin";
+import ProfilePage from "./pages/profile"
 // -----FRONT-END-------
 import AdminPage from "./pages/admin/admin-dashbroad";
 import AdminNews from "./pages/admin/news/admin-news";
@@ -54,7 +55,7 @@ router.on({
         
     },
     "/profile": () => {
-        print();
+        print(ProfilePage);
         
     },
     "/admin/dashbroad": () => {

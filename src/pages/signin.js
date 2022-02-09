@@ -80,13 +80,14 @@ const SignInPage = {
         const password = document.querySelector('#password');  
         const remember = document.querySelector('#remember-me');
 
-        if((localStorage.getItem("email"))&&(localStorage.getItem("password"))){
-            email.value = localStorage.getItem("email");
-            password.value = localStorage.getItem("password");
+        if(localStorage.getItem("user_remember")){
+            email.value = JSON.parse(localStorage.getItem('user_remember')).email;
+            
+            
            
         }else{
-            email = "";
-            password = "";
+            email.value= "";
+            
         }
 
         const formSignin = document.querySelector('#form-signin');
@@ -97,11 +98,12 @@ const SignInPage = {
                     email: email.value,
                     password: password.value,
                 });
-                console.log(response);
+                console.log(response.data.user);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
                 alert("Đăng Nhập Thành Công!")
                 if(remember.checked){
-                    localStorage.setItem("email", email.value);
-                    localStorage.setItem("password", password.value);
+                    localStorage.setItem('user_remember', JSON.stringify(response.data.user));
+                    
                 }
                 
 

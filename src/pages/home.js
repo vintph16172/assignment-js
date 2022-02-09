@@ -27,6 +27,7 @@ const HomePage = {
     },
     afterRender(){
         Cart.afterRender()
+        HeaderPage.afterRender()
     }
 
 }
