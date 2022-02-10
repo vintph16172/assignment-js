@@ -17,7 +17,7 @@
             "dest": "/"
         },
         {
-            "src": "/news/:id",
+            "src": "/news/(.*)",
             "dest": "/"
         },
         {
@@ -45,7 +45,7 @@
             "dest": "/"
         },
         {
-            "src": "/admin/news/:id/edit",
+            "src": "/admin/news/(.*)/edit",
             "dest": "/"
         }
     ]
