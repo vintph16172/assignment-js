@@ -1,0 +1,52 @@
+{
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/"
+        },
+        {
+            "src": "/news",
+            "dest": "/"
+        },
+        {
+            "src": "/about",
+            "dest": "/"
+        },
+        {
+            "src": "/product",
+            "dest": "/"
+        },
+        {
+            "src": "/news/:id",
+            "dest": "/"
+        },
+        {
+            "src": "/signup",
+            "dest": "/"
+        },
+        {
+            "src": "/signin",
+            "dest": "/"
+        },
+        {
+            "src": "/profile",
+            "dest": "/"
+        },
+        {
+            "src": "/admin/dashbroad",
+            "dest": "/"
+        },
+        {
+            "src": "/admin/news",
+            "dest": "/"
+        },
+        {
+            "src": "/admin/news/add",
+            "dest": "/"
+        },
+        {
+            "src": "/admin/news/:id/edit",
+            "dest": "/"
+        }
+    ]
+}
