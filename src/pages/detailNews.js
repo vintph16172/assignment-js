@@ -9,7 +9,10 @@ const DetailNewsPage = {
     async render(id){
         const { data } = await get(id) ;
         return /*html*/`
-        ${HeaderPage.render()}
+        <div id="header">
+            ${HeaderPage.render()}
+        </div>
+
         <div class="container mx-auto my-5 p-5">
       <div class="md:flex no-wrap md:-mx-2    ">
 

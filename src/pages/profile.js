@@ -5,7 +5,10 @@ import Cart from "../component/cart";
 const ProfilePage = {
     render(){
         return /*html*/`
-        ${HeaderPage.render()}
+        <div id="header">
+            ${HeaderPage.render()}
+        </div>
+
         <div class="container mx-auto my-5 p-5">
       <div class="md:flex no-wrap md:-mx-2 border-x-2 border-b-2   ">
         <div class="flex flex-col  my-auto py-4 items-center w-full md:w-3/12 border-t-4  border-t-lab1-blue border-r-2  ">

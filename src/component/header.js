@@ -1,5 +1,5 @@
 import Cart from "./cart";
-
+import { reRender } from "../../utils/reRender"
 const HeaderPage = {
     render(){
         
@@ -17,6 +17,7 @@ const HeaderPage = {
                 <div id="div-logout">
                     
                 </div>
+                ${localStorage.getItem('user') ? '<svg id="logout" xmlns="http://www.w3.org/2000/svg" class=" h-6 w-6 text-white hover:text-lab1-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>' : ""}
                 <svg id="modal-switch" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white hover:text-lab1-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -58,17 +59,15 @@ const HeaderPage = {
         if(localStorage.getItem("user")){
             account.innerHTML= JSON.parse(localStorage.getItem("user")).username;
             account.href = "/profile";
-
-
-            const a = ' <svg id="logout" xmlns="http://www.w3.org/2000/svg" class=" h-6 w-6 text-white hover:text-lab1-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>'
-            divLogout.insertAdjacentHTML( 'beforeend', a );
-
             const btnLogout = document.querySelector("#logout");
             btnLogout.addEventListener('click', function(){
                 localStorage.removeItem('user');
+                reRender(HeaderPage , "#header")
             })
-
+            
         }
+        
+
         
 
 

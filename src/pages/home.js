@@ -6,7 +6,9 @@ import Cart from "../component/cart";
 const HomePage = {
     async render(){
         return /*html*/`
-        ${HeaderPage.render()}
+        <div id="header">
+            ${HeaderPage.render()}
+        </div>
 
         <div class="banner mt-4">
             <img src="/img/banner lab1.png" alt="" class="w-full">

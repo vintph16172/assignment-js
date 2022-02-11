@@ -100,12 +100,19 @@ const SignInPage = {
                 });
                 console.log(response.data.user);
                 localStorage.setItem('user', JSON.stringify(response.data.user));
-                alert("Đăng Nhập Thành Công!")
+                
+                
                 if(remember.checked){
                     localStorage.setItem('user_remember', JSON.stringify(response.data.user));
                     
                 }
                 
+                alert("Đăng Nhập Thành Công!")
+                if(response.data.user.id === 1){
+                    document.location.href="/admin/news";
+                } else {
+                    document.location.href="/";
+                }
 
             } catch (error) {
                 console.log(error.response.data);

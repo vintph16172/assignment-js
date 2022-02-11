@@ -1,5 +1,6 @@
 
 import AdminHeader from "../../../component/admin-header";
+import axios from "axios";
 import { get,update } from "../../../api/post";
 
 
@@ -49,22 +50,27 @@ const AdminNewsEdit = {
                                                     <label class="block text-sm font-medium text-gray-700">
                                                         Ảnh:
                                                     </label>
+                                                    
+
                                                     <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                                         <div class="space-y-1 text-center">
-                                                            
                                                             <img src="${data.img}" alt="" class="mx-auto h-40 w-52 text-gray-400">
+                                                            
                                                             <div class="flex text-sm text-gray-600">
                                                                 <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                                 <span>Upload a file</span>
-                                                                <input id="post-image" name="file-upload" type="file" class="sr-only">
+                                                                <input id="file-upload" name="file-upload" type="file" class="sr-only">
                                                                 </label>
                                                                 <p class="pl-1">or drag and drop</p>
                                                             </div>
-                                                            <p class="text-xs text-gray-500">
-                                                                PNG, JPG, GIF up to 10MB
-                                                            </p>
+                                                            <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
+
+
                                                 </div>
+                                               
 
                                 
                                                 <div class="col-span-6 sm:col-span-6">
@@ -102,20 +108,65 @@ const AdminNewsEdit = {
         `;
         
     },
-    afterRender(id) {
-        
+    async afterRender(id) {
+        AdminHeader.afterRender()
+        const { data } = await get(id);
         const formEdit = document.querySelector("#form-update");
-        formEdit.addEventListener("submit", (e) => {
-          e.preventDefault();
-          update({
-            id: id,
-            title: document.querySelector('#post-title').value,
-            img: "http://placeimg.com/640/480/fashion",
-            desc:document.querySelector('#post-detail').value
-          });
-          console.log('update success');
+        const imgPost = document.querySelector('#file-upload');
+        const imgValue = document.querySelector('#file-upload').value;
+        
+
+        imgPost.addEventListener('change', async (e) => {
+            
+            const file = e.target.files[0];
+            const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
+      
+            const formData = new FormData();
+      
+            formData.append('file', file);
+            formData.append('upload_preset', "ypn4yccr");
+      
+            // call api cloudinary
           
+            const response = await axios.post(CLOUDINARY_API, formData, {
+              headers: {
+                "Content-Type": "application/form-data"
+              }
+            });
+            console.log(response.data.url);
+            
+            formEdit.addEventListener("submit",(b) =>{
+                b.preventDefault();
+                
+                update({
+                    id: id,
+                    title: document.querySelector('#post-title').value,
+                    img: response.data.url,
+                    
+                    desc:document.querySelector('#post-detail').value
+                });
+                alert("Update Thành Công!")
+                
+            })
+      
         });
+        if(imgValue === ""){
+            formEdit.addEventListener("submit",(b) =>{
+                b.preventDefault();
+                
+                update({
+                    id: id,
+                    title: document.querySelector('#post-title').value,
+                    img: data.img,
+                    
+                    desc:document.querySelector('#post-detail').value
+                });
+
+                
+                alert("Update Thành Công!")
+            })
+        }
+        
         
     }
     

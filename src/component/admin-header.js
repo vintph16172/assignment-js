@@ -1,7 +1,10 @@
+
+
+
 const AdminHeader = {
     render(){
         return /*html*/`
-        <nav class="bg-gray-800">
+        <nav class="bg-gray-800" id="admin-header">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
@@ -14,15 +17,15 @@ const AdminHeader = {
                     <div class="hidden md:block">
                         <div class="ml-8 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="/admin/dashbroad" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
+                        <a href="/admin/dashbroad" class="header-link text-white hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
 
-                        <a href="/admin/news" class="text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Bài Viết</a>
+                        <a href="/admin/news" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Bài Viết</a>
 
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Info</a>
+                        <a href="/admin/users" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Tài Khoản</a>
 
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+                        <a href="/" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
 
-                        <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Reports</a>
+                        <a href="/" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Reports</a>
                         </div>
                     </div>
                 </div>
@@ -132,6 +135,20 @@ const AdminHeader = {
         
         
         `;
+
+
+    },
+    afterRender(){
+        
+        const a = document.querySelectorAll(".header-link")
+        a.forEach((i)=>{
+            let mm = i.href.split("/")
+            const spil = window.location.href.split("/")
+            if(mm[4] === spil[4]){
+                i.classList.add("bg-gray-900")
+            }
+        })
+       
 
 
     }

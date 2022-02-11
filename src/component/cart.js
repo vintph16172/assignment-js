@@ -116,7 +116,7 @@ const Cart = {
 
         });
 
-        console.log("aa");
+        
     }
 
 }

@@ -11,6 +11,8 @@ import AdminPage from "./pages/admin/admin-dashbroad";
 import AdminNews from "./pages/admin/news/admin-news";
 import AdminNewsAdd from "./pages/admin/news/admin-news-add";
 import AdminNewsEdit from "./pages/admin/news/admin-news-edit";
+import AdminUsers from "./pages/admin/users/admin-users"
+import AdminUsersEdit from "./pages/admin/users/admin-users-edit"
 
 // -----BACK-END-------
 
@@ -25,7 +27,23 @@ const print = async (content, id = "") => {
     if(content.afterRender) content.afterRender(id);
 };
 
-
+router.on("/admin/*", () => {}, {
+    before(done, match) {
+      // do something
+        if(localStorage.getItem('user')){
+            const userId = JSON.parse(localStorage.getItem('user')).id;
+            
+            if(userId === 1){
+                done();     
+            } else {
+                document.location.href="/";
+            }
+        } else{
+          document.location.href="/";
+        }
+      
+    }
+})
 
 
 router.on({
@@ -69,6 +87,12 @@ router.on({
     },
     "/admin/news/:id/edit": (value) => {
         print(AdminNewsEdit,value.data.id);
+    },
+    "/admin/users": () => {
+        print(AdminUsers);
+    },
+    "/admin/users/:id/edit": (value) => {
+        print(AdminUsersEdit,value.data.id);
     },
 
     
