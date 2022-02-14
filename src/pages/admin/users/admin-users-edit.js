@@ -2,7 +2,6 @@ import AdminHeader from "../../../component/admin-header";
 import { get,update } from "../../../api/user"
 
 
-
 const AdminUsersEdit = {
     
     async render(id) {
@@ -32,15 +31,52 @@ const AdminUsersEdit = {
                                         <div class="px-4 py-5 bg-white sm:p-6">
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Tên Tài Khoản:</label>
-                                                    <input type="text" name="first-name" id="post-title" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md" value="${data.username}">
+                                                    <label for="user-name" class="block text-sm font-medium text-gray-700">Tên Tài Khoản:</label>
+                                                    <input type="text" name="user-name" id="user-name" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300  focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" value="${data.username}">
                                                 </div>
                                 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Email:</label>
-                                                    <input type="text" name="first-name" id="post-createtime" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md" value="${data.email}">
+                                                    <label for="user-email" class="block text-sm font-medium text-gray-700">Email:</label>
+                                                    <input type="text" name="user-email" id="user-email" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300 focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" value="${data.email}">
                                                 </div>
+
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="user-borndate" class="block text-sm font-medium text-gray-700">Ngày Sinh:</label>
+                                                    <input type="date" name="user-borndate" id="user-borndate" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300 focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" value="${data.borndate}">
+                                                </div>
+
+                                                 
                                 
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="country" class="block text-sm font-medium text-gray-700">Giới Tính:</label>
+                                                    <select id="user-gender" name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
+                                                    
+                                                    ${data.gender === 1 ? '<option value="1" >Nam</option><option value="0">Nữ</option>' : '<option value="0">Nữ</option><option value="1">Nam</option>'}
+                                                    
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="user-phonenumber" class="block text-sm font-medium text-gray-700">Số Điện Thoại:</label>
+                                                    <input type="number" name="user-phonenumber" id="user-phonenumber" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300 focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" value="${data.phonenumber}">
+                                                </div>
+
+                                                 
+                                
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="country" class="block text-sm font-medium text-gray-700">Quyền Hạn:</label>
+                                                    <select id="user-permission" name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
+                                                    
+                                                    ${data.permission === 1 ? '<option value="1" >Admin</option><option value="0">Người Dùng</option>' : '<option value="0">Người Dùng</option><option value="1">Admin</option>'}
+                                                    
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-6">
+                                                    <label for="user-address" class="block text-sm font-medium text-gray-700">Địa Chỉ:</label>
+                                                    <input type="text" name="user-address" id="user-address" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300 focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" value="${data.address}">
+                                                </div>
+
                                                 
 
                                                 
@@ -54,7 +90,7 @@ const AdminUsersEdit = {
 
                                                     <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                                         <div class="space-y-1 text-center">
-                                                            <img src="${data.img}" alt="" class="mx-auto h-40 w-52 text-gray-400">
+                                                            <img src="${data.avatar}" alt="" class="mx-auto h-40 w-52 text-gray-400">
                                                             
                                                             <div class="flex text-sm text-gray-600">
                                                                 <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
@@ -69,15 +105,7 @@ const AdminUsersEdit = {
                                                     </div>
 
                                 
-                                                    <div class="col-span-6 sm:col-span-6">
-                                                        <label for="about" class="block text-sm font-medium text-gray-700">
-                                                            Nội Dung:
-                                                        </label>
-                                                        <div class="mt-1">
-                                                            <textarea id="post-detail" name="about" rows="3" class="h-32 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="..."  >${data.password}</textarea>
-                                                        </div>
-                                                        
-                                                    </div>
+                                                    
 
                                                 
 
@@ -105,20 +133,90 @@ const AdminUsersEdit = {
         `;
         
     },
-    afterRender(id) {
+    async afterRender(id) {
         AdminHeader.afterRender()
+        const { data } = await get(id);
         const formEdit = document.querySelector("#form-update");
-        formEdit.addEventListener("submit", (e) => {
-          e.preventDefault();
-          update({
-            id: id,
-            title: document.querySelector('#post-title').value,
-            img: "http://placeimg.com/640/480/fashion",
-            desc:document.querySelector('#post-detail').value
-          });
-          console.log('update success');
+        const imgPost = document.querySelector('#file-upload');
+        const imgValue = document.querySelector('#file-upload').value;
+        
+
+        imgPost.addEventListener('change', async (e) => {
+            
+            const file = e.target.files[0];
+            const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
+      
+            const formData = new FormData();
+      
+            formData.append('file', file);
+            formData.append('upload_preset', "ypn4yccr");
+      
+            // call api cloudinary
           
+            const response = await axios.post(CLOUDINARY_API, formData, {
+              headers: {
+                "Content-Type": "application/form-data"
+              }
+            });
+            console.log(response.data.url);
+            
+            formEdit.addEventListener("submit",(b) =>{
+                b.preventDefault();
+                
+                update({
+                    id: id,
+                    username: document.querySelector('#user-name').value,
+                    email: document.querySelector('#user-email').value,
+                    borndate: document.querySelector('#user-borndate').value,
+                    gender: document.querySelector('#user-gender').value,
+                    phonenumber: document.querySelector('#user-phonenumber').value,
+                    permission: document.querySelector('#user-permission').value,
+                    address: document.querySelector('#user-address').value,
+                    avatar: response.data.url
+                    
+                })
+                 
+                alert("Update Thành Công!")
+                
+            })
+      
         });
+        if(imgValue === ""){
+            formEdit.addEventListener("submit",(b) =>{
+                b.preventDefault();
+                
+                update({
+                    id: id,
+                    username: document.querySelector('#user-name').value,
+                    email: document.querySelector('#user-email').value,
+                    borndate: document.querySelector('#user-borndate').value,
+                    gender: document.querySelector('#user-gender').value,
+                    phonenumber: document.querySelector('#user-phonenumber').value,
+                    permission: document.querySelector('#user-permission').value,
+                    address: document.querySelector('#user-address').value,
+                    avatar: data.avatar,
+                    password: "1234"
+                })
+              
+                const a = {
+                    id: id,
+                    username: document.querySelector('#user-name').value,
+                    email: document.querySelector('#user-email').value,
+                    borndate: document.querySelector('#user-borndate').value,
+                    gender: document.querySelector('#user-gender').value,
+                    phonenumber: document.querySelector('#user-phonenumber').value,
+                    permission: document.querySelector('#user-permission').value,
+                    address: document.querySelector('#user-address').value,
+                    avatar: data.avatar,
+                    password: data.password
+                }
+                
+                console.log(a);
+                
+                alert("Update Thành Công!")
+            })
+        }
+        
         
     }
     

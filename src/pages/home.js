@@ -1,4 +1,5 @@
 import News from "../component/news";
+import Products from "../component/product"
 import HeaderPage from "../component/header";
 import FooterPage from "../component/footer";
 import Cart from "../component/cart";
@@ -16,9 +17,12 @@ const HomePage = {
 
         <div class="content">
             <div class="content1">
-              ${await News.render()}
+                ${await Products.render()}
+              
             </div>
-
+            <div class="content2">
+            ${await News.render()}
+            </div>
             
 
         </div>

@@ -1,24 +1,24 @@
 {
+  "categoryPosts":[
+    {"id":"1","categoryName":"Thông Tin"},
+    {"id":"2","categoryName":"Tuyển Sinh"},
+    {"id":"3","categoryName":"Giáo Dục"},
+    {"id":"4","categoryName":"Hoạt Động Sinh Viên"},
+    {"id":"5","categoryName":"Tuyển Dụng"}
+  ],
   "posts": [
     {
       "id": "37",
+      "categoryPostID":"1",
       "title": "Rodney ",
       "img": "http://res.cloudinary.com/vintph16172/image/upload/v1644578319/msou7lylodzxcavpf5bg.jpg",
       "desc": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles"
     },
     {
-      "createdAt": "2022-01-20T19:24:07.210Z",
-      "title": "Bài viết mới cập nhật ",
+      "id": "52",
+      "title": "Bài viết mới cập nhật",
       "img": "https://picsum.photos/200/200",
-      "desc": "Mô tả cho bài viết vừa cập nhật",
-      "id": "51"
-    },
-    {
-      "createdAt": "2022-01-20T11:10:21.938Z",
-      "title": "Bài viết mới cập nhật ",
-      "img": "https://picsum.photos/200/200",
-      "desc": "Mô tả cho bài viết vừa cập nhật",
-      "id": "52"
+      "desc": "Mô tả cho bài viết vừa cập nhật"
     },
     {
       "createdAt": "2022-01-20T14:19:17.059Z",
@@ -505,19 +505,141 @@
       "id": "119"
     }
   ],
-  "products": [],
+  
+  "categoryProducts":[
+    {"id":"1","categoryName":"Áo"},
+    {"id":"2","categoryName":"Quần"},
+    {"id":"3","categoryName":"Quà Lưu Niệm"}
+  ],
+  "products": [
+    {
+      "id":"1",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"1111"
+    },
+    {
+      "id":"2",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"222"
+    },
+    {
+      "id":"3",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"333"
+    },
+    {
+      "id":"4",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"444"
+    },
+    {
+      "id":"5",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"555"
+    },
+    {
+      "id":"6",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"666"
+    },
+    {
+      "id":"7",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"777"
+    },
+    {
+      "id":"8",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"888"
+    },
+    {
+      "id":"9",
+      "categoryProductID":"1",
+      "name":"Áo Poly",
+      "image":"https://picsum.photos/200/200",
+      "price":"200000",
+      "quantity_amount":"1",
+      "desc":"abc",
+      "view":"999"
+    }
+
+  ],
   "users": [
     {
+      "avatar": "https://picsum.photos/200/200",
+      "permission": "1",
+      "borndate": "2002-09-01",
+      "address": "41 Ngõ 285 Đội Cấn,Ba Đình",
+      "phonenumber": "11998001001",
+      "gender": "1",
       "email": "vipro292002@gmail.com",
       "password": "$2a$10$lk3ddDiyrQia0yISh5zpPOcj2oraU76bRktv2M8njVJsbXkkK5YdO",
       "username": "vintph16172",
       "id": 1
     },
     {
-      "email": "vintph16172@fpt.edu.vn",
-      "password": "$2a$10$iYd//iN27NK3TgMm5TsIFe8zgv2RJmgnu34E0n.UJqQMYfCEBzTLG",
+      "id": 2,
       "username": "vintph16172",
-      "id": 2
+      "email": "vintph16172@fpt.edu.vn",
+      "borndate": "2002-09-01",
+      "gender": "0",
+      "phonenumber": "11998000892",
+      "permission": "0",
+      "address": "41 Ngõ 285 Đội Cấn,Ba Đình",
+      "avatar": "https://picsum.photos/200/200",
+      "password": "$2a$10$F0VrElnst8Xhf2d27WbD1ecUa5JTfJkj2U0Iv/PwP2VInl.khhvT."
+    },
+    {
+      "id": 3,
+      "username": "vintph16172",
+      "email": "nguoidung1@fpt.edu.vn",
+      "borndate": "2002-09-01",
+      "gender": "0",
+      "phonenumber": "11998000892",
+      "permission": "0",
+      "address": "41 Ngõ 285 Đội Cấn,Ba Đình",
+      "avatar": "https://picsum.photos/200/200",
+      "password": "$2a$10$x9H08.r02T9XvWVW5ohJVO2dZdaYSzxpWw1biojHVklTgTAnzN1ai"
     }
   ]
 }

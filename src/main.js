@@ -31,9 +31,9 @@ router.on("/admin/*", () => {}, {
     before(done, match) {
       // do something
         if(localStorage.getItem('user')){
-            const userId = JSON.parse(localStorage.getItem('user')).id;
+            const userId = JSON.parse(localStorage.getItem('user')).permission;
             
-            if(userId === 1){
+            if(userId == 1){
                 done();     
             } else {
                 document.location.href="/";
@@ -59,6 +59,7 @@ router.on({
         print(ProductPage);
         
     },
+    
     "/news/:id": (value) =>{
         console.log(value.data.id);
         print(DetailNewsPage,value.data.id);

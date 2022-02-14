@@ -2,14 +2,21 @@
 import axios from "axios";
 import {  getAll } from "../api/post"
 
+
 const News = {
     async render() {
             const { data } = await getAll();
             console.log(data);
             const data2 = [];
             
-            for(let i = 1;i<=8;i++){
-                data2.push(data[data.length-i])
+            if(data.length < 8){
+                data.map((p)=>{
+                    data2.push(p)
+                })
+            }else{
+                for(let i = 1;i<=8;i++){
+                    data2.push(data[data.length-i])
+                }
             }
          return /* html */`
            

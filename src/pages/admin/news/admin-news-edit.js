@@ -2,7 +2,7 @@
 import AdminHeader from "../../../component/admin-header";
 import axios from "axios";
 import { get,update } from "../../../api/post";
-
+import { reRender } from "../../../../utils/reRender"
 
 const AdminNewsEdit = {
     
@@ -160,7 +160,8 @@ const AdminNewsEdit = {
                     img: data.img,
                     
                     desc:document.querySelector('#post-detail').value
-                });
+                })
+                
 
                 
                 alert("Update Thành Công!")
