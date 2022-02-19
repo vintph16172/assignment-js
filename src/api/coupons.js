@@ -1,27 +1,22 @@
 import instance from "./config";
 
 export const getAll = () => {
-    const url = `/products`;
-    return instance.get(url);
-}
-export const getAllWithCate = () => {
-    const url = `/products/?_expand=categoryProduct`;
+    const url = `/coupons`;
     return instance.get(url);
 }
 export const get = (id) => {
-    const url = `/products/${id}?_expand=categoryProduct`;
+    const url = `/coupons/${id}`;
     return instance.get(url);
 }
-
 export const add = (post) => {
-    const url = `/products`;
+    const url = `/coupons`;
     return instance.post(url, post)
 }
 export const remove = (id) => {
-    const url = `/products/${id}`;
+    const url = `/coupons/${id}`;
     return instance.delete(url)
 }
 export const update = (post) => {
-    const url = `/products/${post.id}`;
+    const url = `/coupons/${post.id}`;
     return instance.put(url, post)
 }

@@ -1,7 +1,8 @@
 import AdminHeader from "../../../component/admin-header";
 import axios from "axios";
 import { add } from "../../../api/post";
-
+import toastr from 'toastr';
+import "toastr/build/toastr.min.css";
 
 const AdminNewsAdd = {
     render() {
@@ -139,6 +140,7 @@ const AdminNewsAdd = {
                     
                     desc:document.querySelector('#post-detail').value
                   });
+                  toastr.success('Thêm Thành Công!')
             })
           });
 

@@ -1,6 +1,7 @@
 import AdminHeader from "../../../component/admin-header";
 import { get,update } from "../../../api/user"
-
+import toastr from 'toastr';
+import "toastr/build/toastr.min.css";
 
 const AdminUsersEdit = {
     
@@ -175,8 +176,8 @@ const AdminUsersEdit = {
                     avatar: response.data.url
                     
                 })
-                 
-                alert("Update Thành Công!")
+                toastr.success("Update Thành Công!")
+                
                 
             })
       
@@ -212,8 +213,8 @@ const AdminUsersEdit = {
                 }
                 
                 console.log(a);
+                toastr.success("Update Thành Công!")
                 
-                alert("Update Thành Công!")
             })
         }
         

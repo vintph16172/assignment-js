@@ -1,24 +1,24 @@
 
 import AdminHeader from "../../../component/admin-header";
 import axios from "axios";
-import { get,update } from "../../../api/post";
-import { reRender } from "../../../../utils/reRender"
+import {add } from "../../../api/product";
+import { getAllCateProduct } from "../../../api/catagoryProducts"
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
 
-const AdminNewsEdit = {
+
+const AdminProductsAdd = {
     
-    async render(id) {
-        
-        const { data } = await get(id);
-       
+    async render() {
+        const data2 = await getAllCateProduct();
+        console.log(data2);
         return /*html*/`
         ${AdminHeader.render()}
         
         <div class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <h1 class="text-3xl font-bold text-gray-900">
-                Dashboard News Edit
+                Sản Phẩm Add
             </h1>
             </div>
         </div>
@@ -35,13 +35,50 @@ const AdminNewsEdit = {
                                         <div class="px-4 py-5 bg-white sm:p-6">
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Tiêu Đề:</label>
-                                                    <input type="text" name="first-name" id="post-title" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md" value="${data.title}">
+                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Tên:</label>
+                                                    <input type="text" name="first-name" id="product-name" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300  focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" >
                                                 </div>
+                                               
                                 
                                                 <div class="col-span-6 sm:col-span-3">
-                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Ngày Đăng:</label>
-                                                    <input type="text" name="first-name" id="post-createtime" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md" value="${data.createdAt}">
+                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Danh Mục:</label>
+                                                    <select id="product-category" name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
+
+                                                        ${data2.data.map((category)=>{
+                                                            return /*html*/`<option value="${category.id}" >${category.categoryName}</option>`
+                                                                
+                                                            
+
+                                                        })}
+                                                        
+                                                        
+                                                    
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Giá:</label>
+                                                    <input type="number" name="first-name" id="product-price" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300  focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" >
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Số Lượng:</label>
+                                                    <input type="number" name="first-name" id="product-quantity" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300  focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" >
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Lượt Xem:</label>
+                                                    <input type="number" name="first-name" id="product-view" autocomplete="given-name" class="h-10 mt-1 py-2 px-3 border border-gray-300  focus:ring-indigo-500 focus:border-[#0066B3] block w-full shadow-sm sm:text-sm  rounded-md" >
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="country" class="block text-sm font-medium text-gray-700">Trạng Thái:</label>
+                                                    <select id="product-status" name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
+                                                        <option value="1" >Hoạt Động</option>
+                                                        <option value="0">Ẩn</option>
+                                                    
+                                                    
+                                                    </select>
                                                 </div>
                                 
                                                 
@@ -56,7 +93,9 @@ const AdminNewsEdit = {
 
                                                     <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                                         <div class="space-y-1 text-center">
-                                                            <img src="${data.img}" alt="" class="mx-auto h-40 w-52 text-gray-400">
+                                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                            </svg>
                                                             
                                                             <div class="flex text-sm text-gray-600">
                                                                 <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
@@ -72,6 +111,7 @@ const AdminNewsEdit = {
 
 
                                                 </div>
+
                                                
 
                                 
@@ -80,7 +120,7 @@ const AdminNewsEdit = {
                                                         Nội Dung:
                                                     </label>
                                                     <div class="mt-1">
-                                                        <textarea id="post-detail" name="about" rows="3" class="h-32 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="..."  >${data.desc}</textarea>
+                                                        <textarea id="product-detail" name="about" rows="3" class="h-32 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="..."  ></textarea>
                                                     </div>
                                                     
                                                 </div>
@@ -110,12 +150,11 @@ const AdminNewsEdit = {
         `;
         
     },
-    async afterRender(id) {
+    afterRender() {
         AdminHeader.afterRender()
-        const { data } = await get(id);
         const formEdit = document.querySelector("#form-update");
         const imgPost = document.querySelector('#file-upload');
-        const imgValue = document.querySelector('#file-upload').value;
+        
         
 
         imgPost.addEventListener('change', async (e) => {
@@ -140,40 +179,29 @@ const AdminNewsEdit = {
             formEdit.addEventListener("submit",(b) =>{
                 b.preventDefault();
                 
-                update({
-                    id: id,
-                    title: document.querySelector('#post-title').value,
-                    img: response.data.url,
+                add({
                     
-                    desc:document.querySelector('#post-detail').value
+                    categoryProductId: document.querySelector('#product-category').value,
+                    name: document.querySelector('#product-name').value,
+                    price: document.querySelector('#product-price').value,
+                    quantity_amount: document.querySelector('#product-quantity').value,
+                    view: document.querySelector('#product-view').value,
+                    status: document.querySelector('#product-status').value,
+                    image: response.data.url,
+                    desc:document.querySelector('#product-detail').value
+
+                    
                 });
                 toastr.success("Update Thành Công!")
                 
             })
       
         });
-        if(imgValue === ""){
-            formEdit.addEventListener("submit",(b) =>{
-                b.preventDefault();
-                
-                update({
-                    id: id,
-                    title: document.querySelector('#post-title').value,
-                    img: data.img,
-                    
-                    desc:document.querySelector('#post-detail').value
-                })
-                
-
-                
-                
-                toastr.success("Update Thành Công!")
-            })
-        }
+        
         
         
     }
     
 
 }
-export default AdminNewsEdit;
+export default AdminProductsAdd;

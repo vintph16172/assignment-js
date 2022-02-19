@@ -1,6 +1,10 @@
 import instance from "./config";
 
-export const getAll2 = () => {
+export const getAllByID = (id) => {
+    const url = `/categoryProducts/${id}?_embed=products`;
+    return instance.get(url);
+}
+export const getAllCateProduct = () => {
     const url = `/categoryProducts`;
     return instance.get(url);
 }

@@ -6,6 +6,9 @@ import DetailNewsPage from "./pages/detailNews";
 import SignUpPage from "./pages/signup";
 import SignInPage from "./pages/signin";
 import ProfilePage from "./pages/profile"
+import DetailProductsPage from "./pages/detailProducts";
+import CartPage from "./pages/cart"
+
 // -----FRONT-END-------
 import AdminPage from "./pages/admin/admin-dashbroad";
 import AdminNews from "./pages/admin/news/admin-news";
@@ -13,6 +16,9 @@ import AdminNewsAdd from "./pages/admin/news/admin-news-add";
 import AdminNewsEdit from "./pages/admin/news/admin-news-edit";
 import AdminUsers from "./pages/admin/users/admin-users"
 import AdminUsersEdit from "./pages/admin/users/admin-users-edit"
+import AdminProducts from "./pages/admin/products/admin-products"
+import AdminProductsEdit from "./pages/admin/products/admin-products-edit"
+import AdminProductsAdd from "./pages/admin/products/admin-products-add"
 
 // -----BACK-END-------
 
@@ -55,11 +61,19 @@ router.on({
         print(AboutPage);
         
     },
-    "/product": () => {
+    "/cart": () => {
+        print(CartPage);
+        
+    },
+    "/products": () => {
         print(ProductPage);
         
     },
-    
+    "/products/:id": (value) =>{
+        console.log(value.data.id);
+        print(DetailProductsPage,value.data.id);
+        
+    },
     "/news/:id": (value) =>{
         console.log(value.data.id);
         print(DetailNewsPage,value.data.id);
@@ -79,6 +93,15 @@ router.on({
     },
     "/admin/dashbroad": () => {
         print(AdminPage);
+    },
+    "/admin/products": () => {
+        print(AdminProducts);
+    },
+    "/admin/products/add": () => {
+        print(AdminProductsAdd);
+    },
+    "/admin/products/:id/edit": (value) => {
+        print(AdminProductsEdit,value.data.id);
     },
     "/admin/news": () => {
         print(AdminNews);

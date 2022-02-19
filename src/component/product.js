@@ -1,12 +1,12 @@
 
 import axios from "axios";
 import {  getAll } from "../api/product"
-import { getAll2 } from "../api/catagoryProducts";
+import { getAllCateProduct } from "../api/catagoryProducts";
 
 const productsNew = {
     async render() {
             const { data } = await getAll();
-            const { data2 } = await getAll2();
+            const  data2  = await getAllCateProduct();
             console.log(data);
             console.log(data2);
             const arrProductNew = [];
@@ -51,8 +51,10 @@ const productsNew = {
                 
             </div>
 
-            <h1 class="text-lab1-blue text-2xl  font-bold mt-6" >HOẠT ĐỘNG SINH VIÊN</h1>
-
+            
+            <div class="grid  place-items-center">
+                <h1 class="text-lab1-blue text-2xl  font-bold mt-6" >Sản Phẩm Hot Nhất</h1>
+            </div>
             <div class="md:grid grid-cols-4 gap-x-8">
                 
                 ${arrProductHot.map((productsHot)=>/*html*/`

@@ -1,15 +1,30 @@
 {
-  "categoryPosts":[
-    {"id":"1","categoryName":"Thông Tin"},
-    {"id":"2","categoryName":"Tuyển Sinh"},
-    {"id":"3","categoryName":"Giáo Dục"},
-    {"id":"4","categoryName":"Hoạt Động Sinh Viên"},
-    {"id":"5","categoryName":"Tuyển Dụng"}
+  "categoryPosts": [
+    {
+      "id": 1,
+      "categoryName": "Thông Tin"
+    },
+    {
+      "id": 2,
+      "categoryName": "Tuyển Sinh"
+    },
+    {
+      "id": 3,
+      "categoryName": "Giáo Dục"
+    },
+    {
+      "id": 4,
+      "categoryName": "Hoạt Động Sinh Viên"
+    },
+    {
+      "id": 5,
+      "categoryName": "Tuyển Dụng"
+    }
   ],
   "posts": [
     {
       "id": "37",
-      "categoryPostID":"1",
+      "categoryPostId": 1,
       "title": "Rodney ",
       "img": "http://res.cloudinary.com/vintph16172/image/upload/v1644578319/msou7lylodzxcavpf5bg.jpg",
       "desc": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles"
@@ -505,113 +520,141 @@
       "id": "119"
     }
   ],
-  
-  "categoryProducts":[
-    {"id":"1","categoryName":"Áo"},
-    {"id":"2","categoryName":"Quần"},
-    {"id":"3","categoryName":"Quà Lưu Niệm"}
+  "categoryProducts": [
+    {
+      "id": 1,
+      "categoryName": "Áo"
+    },
+    {
+      "id": 2,
+      "categoryName": "Quần"
+    },
+    {
+      "id": 3,
+      "categoryName": "Quà Lưu Niệm"
+    }
   ],
   "products": [
     {
-      "id":"1",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"1111"
+      "id": 1,
+      "categoryProductId": 1,
+      "name": "Áo Poly",
+      "price": "200000",
+      "quantity_amount": 1,
+      "view": "1111",
+      "status": 0,
+      "image": "https://picsum.photos/200/200",
+      "desc": "abc"
     },
     {
-      "id":"2",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"222"
+      "id": 2,
+      "categoryProductId": 2,
+      "name": "Áo Poly",
+      "image": "https://picsum.photos/200/200",
+      "price": "200000",
+      "quantity_amount": 1,
+      "desc": "abc",
+      "view": "222",
+      "status": 1
     },
     {
-      "id":"3",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"333"
+      "id": 3,
+      "categoryProductId": 1,
+      "name": "Áo Poly",
+      "image": "https://picsum.photos/200/200",
+      "price": "200000",
+      "quantity_amount": 1,
+      "desc": "abc",
+      "view": "333",
+      "status": 1
     },
     {
-      "id":"4",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"444"
+      "id": 4,
+      "categoryProductId": 1,
+      "name": "Áo Poly",
+      "image": "https://picsum.photos/200/200",
+      "price": "200000",
+      "quantity_amount": 1,
+      "desc": "abc",
+      "view": "444",
+      "status": 1
     },
     {
-      "id":"5",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"555"
+      "id": 5,
+      "categoryProductId": 1,
+      "name": "Áo Poly",
+      "image": "https://picsum.photos/200/200",
+      "price": "200000",
+      "quantity_amount": 1,
+      "desc": "abc",
+      "view": "555",
+      "status": 1
     },
     {
-      "id":"6",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"666"
+      "id": "6",
+      "categoryProductId": 1,
+      "name": "Áo Poly",
+      "image": "https://picsum.photos/200/200",
+      "price": "200000",
+      "quantity_amount": 1,
+      "desc": "abc",
+      "view": "666",
+      "status": 1
     },
     {
-      "id":"7",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"777"
+      "id": "7",
+      "categoryProductId": 1,
+      "name": "Áo Poly",
+      "image": "https://picsum.photos/200/200",
+      "price": "200000",
+      "quantity_amount": 1,
+      "desc": "abc",
+      "view": "777",
+      "status": 1
     },
     {
-      "id":"8",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"888"
+      "id": "8",
+      "categoryProductId": 1,
+      "name": "Áo Poly",
+      "image": "https://picsum.photos/200/200",
+      "price": "200000",
+      "quantity_amount": 1,
+      "desc": "abc",
+      "view": "888",
+      "status": 1
     },
     {
-      "id":"9",
-      "categoryProductID":"1",
-      "name":"Áo Poly",
-      "image":"https://picsum.photos/200/200",
-      "price":"200000",
-      "quantity_amount":"1",
-      "desc":"abc",
-      "view":"999"
+      "categoryProductId": 1,
+      "name": "abc1",
+      "price": 1,
+      "quantity_amount": 1,
+      "view": 1,
+      "status": 1,
+      "image": "http://res.cloudinary.com/vintph16172/image/upload/v1645017247/tu4vjyz5innp5f800hvw.jpg",
+      "desc": "abc",
+      "id": "gXkn0bu"
     }
-
+  ],
+  "coupons": [
+    {
+      "id": 1,
+      "code":"sale50",
+      "sale":"50"
+    },
+    {
+      "id": 2,
+      "code":"sale100",
+      "sale":"100"
+    }
   ],
   "users": [
     {
       "avatar": "https://picsum.photos/200/200",
-      "permission": "1",
+      "permission": 1,
       "borndate": "2002-09-01",
       "address": "41 Ngõ 285 Đội Cấn,Ba Đình",
       "phonenumber": "11998001001",
-      "gender": "1",
+      "gender": 1,
       "email": "vipro292002@gmail.com",
       "password": "$2a$10$lk3ddDiyrQia0yISh5zpPOcj2oraU76bRktv2M8njVJsbXkkK5YdO",
       "username": "vintph16172",
@@ -622,9 +665,9 @@
       "username": "vintph16172",
       "email": "vintph16172@fpt.edu.vn",
       "borndate": "2002-09-01",
-      "gender": "0",
+      "gender": 0,
       "phonenumber": "11998000892",
-      "permission": "0",
+      "permission": 0,
       "address": "41 Ngõ 285 Đội Cấn,Ba Đình",
       "avatar": "https://picsum.photos/200/200",
       "password": "$2a$10$F0VrElnst8Xhf2d27WbD1ecUa5JTfJkj2U0Iv/PwP2VInl.khhvT."
@@ -634,9 +677,9 @@
       "username": "vintph16172",
       "email": "nguoidung1@fpt.edu.vn",
       "borndate": "2002-09-01",
-      "gender": "0",
+      "gender": 0,
       "phonenumber": "11998000892",
-      "permission": "0",
+      "permission": 0,
       "address": "41 Ngõ 285 Đội Cấn,Ba Đình",
       "avatar": "https://picsum.photos/200/200",
       "password": "$2a$10$x9H08.r02T9XvWVW5ohJVO2dZdaYSzxpWw1biojHVklTgTAnzN1ai"

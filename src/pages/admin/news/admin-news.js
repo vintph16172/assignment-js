@@ -3,6 +3,8 @@ import AdminHeader from "../../../component/admin-header";
 import {  getAll,remove } from "../../../api/post";
 import { reRender } from "../../../../utils/reRender"
 
+import toastr from 'toastr';
+import "toastr/build/toastr.min.css";
 const AdminNews = {
     async render(){
         const { data } = await getAll();
@@ -142,12 +144,13 @@ const AdminNews = {
         btns.forEach((buttonElement) => {
             const id = buttonElement.dataset.id;
             buttonElement.addEventListener("click", () => {
-                const confirm = window.confirm("Bạn có muốn xóa hay không?");
-                if(confirm){
-                  remove(id)
-                    .then(() => console.log('Bạn đã xóa thành công'))
-                    .then(()=>{reRender(AdminNews , "#content") })     
-                }
+                // const confirm = window.confirm("Bạn có muốn xóa hay không?");
+                // if(confirm){
+                //   remove(id)
+                //     .then(() => toastr.success('Bạn đã xóa thành công'))
+                //     .then(()=>{reRender(AdminNews , "#content") })     
+                // }
+                console.log(id);
                 
             });
         });

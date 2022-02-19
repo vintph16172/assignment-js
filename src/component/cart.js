@@ -1,5 +1,17 @@
+import { decreaseQty, increaseQty, removeItemInCart } from "../../utils/cart";
+import HeaderPage from "../component/header";
+import { reRender } from "../../utils/rerender";
+import { $ } from "../../utils/selector";
+import toastr from 'toastr';
+import "toastr/build/toastr.min.css";
+
 const Cart = {
     render() {
+        let cart = [];
+        if (localStorage.getItem('cart')) {
+            cart = JSON.parse(localStorage.getItem('cart'));
+            console.log(cart);
+        }
         return /*html*/`
 
         
@@ -20,7 +32,7 @@ const Cart = {
                 </div>
 
                 <!-- Modal body -->
-                <div class="max-h-48 overflow-y-scroll p-4">
+                <div id="cart" class="max-h-48 overflow-y-scroll p-4">
                     <div class="flex flex-col">
                         <div class="-my-2  sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -46,34 +58,47 @@ const Cart = {
                                     </tr>
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
+                                    
+
+                                    ${cart.length > 0 ? cart.map(item => /*html*/`
                                     <tr>
                                         <td class="px-6 py-4 whitespace-normal">
-                                        <div class="flex items-center">
-                                            <div class="flex-shrink-0 h-10 w-10">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                                alt="">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                <img class="h-10 w-10 rounded-full"
+                                                    src="${item.image}"
+                                                    alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">${item.name}</div>
+                                                <div class="text-sm text-gray-500"></div>
+                                                </div>
                                             </div>
-                                            <div class="ml-4">
-                                            <div class="text-sm font-medium text-gray-900">Jane Cooper</div>
-                                            <div class="text-sm text-gray-500">jane.cooper@example.com</div>
-                                            </div>
-                                        </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                        <div class="text-sm text-gray-500">Optimization</div>
+                                            <div class="text-sm text-gray-900">${item.categoryProductId}</div>
+                                            <div class="text-sm text-gray-500"></div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-normal">
-                                        <span
-                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                            Active </span>
+                                            <span
+                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                ${item.status === 1 ?"Còn Hàng" : "Hết Hàng"} </span>
                                         </td>
-                                        <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">Admin</td>
+                                        <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
+                                           
+                                            <input type="number" value="${item.quantity}" class="border border-gray-400 p-3" />
+                                            <button data-id="${item.id}" class="btn btn-increase inline-block p-3 bg-green-500 text-white">Tăng</button>
+                                            <button data-id="${item.id}" class="btn btn-decrease inline-block p-3 bg-orange-500 text-white">Giảm</button>
+                                        </td>
                                         <td class="px-6 py-4 whitespace-normal text-right text-sm font-medium">
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                            <button data-id="${item.id}" class="btn btn-remove inline-block p-3 bg-red-500 text-white">Xóa</button>
                                         </td>
                                     </tr>
+                                    `).join("") : `
+                                        <tr>
+                                            <td colspan="4">No record</td>
+                                        </tr>
+                                    `}
 
                                     <!-- More people... -->
                                     </tbody>
@@ -86,7 +111,8 @@ const Cart = {
 
             <!-- Modal footer -->
             <div class="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
-            <button class="bg-[#0066B3] text-white px-4 py-2 rounded-md hover:bg-[#F26F1B] transition">Thanh Toán</button>
+           
+            <a href="/cart"> <button class="bg-[#0066B3] text-white px-4 py-2 rounded-md hover:bg-[#F26F1B] transition">Thanh Toán</button></a>
             <button id="modal-close2"
                 class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-[#F26F1B] transition">Đóng</button>
             </div>
@@ -116,7 +142,24 @@ const Cart = {
 
         });
 
-        
+        $(".btn").forEach(btn => {
+            const id = btn.dataset.id;
+            btn.addEventListener('click', function(){
+                console.log(id);
+                if(btn.classList.contains('btn-increase')){
+                    increaseQty(id, () => reRender(Cart, "#cart"));
+                } else if(btn.classList.contains('btn-decrease')){
+                    decreaseQty(id, () => reRender(Cart, "#cart"));
+                } else if(btn.classList.contains('btn-decrease')) {
+                    removeItemInCart(id, () => {
+                        reRender(Cart, "#cart");
+                        toastr.success("Bạn đã xóa thành công")
+                    })
+                }
+            })
+        }) 
+
+
     }
 
 }
