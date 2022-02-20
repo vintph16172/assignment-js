@@ -2,11 +2,14 @@ import Navigo from "navigo";
 import HomePage from "./pages/home";
 import AboutPage from "./pages/about";
 import ProductPage from "./pages/product";
+import NewsPage from "./pages/news";
 import DetailNewsPage from "./pages/detailNews";
 import SignUpPage from "./pages/signup";
 import SignInPage from "./pages/signin";
 import ProfilePage from "./pages/profile"
 import DetailProductsPage from "./pages/detailProducts";
+import ProductSortPage from "./pages/product-sort";
+import CategoryProductsPage from "./pages/categoryProducts";
 import CartPage from "./pages/cart"
 
 // -----FRONT-END-------
@@ -26,7 +29,7 @@ import AdminProductsAdd from "./pages/admin/products/admin-products-add"
 
 
 
-const router = new Navigo("/" , {linksSelector: "a"});
+const router = new Navigo("/" , {linksSelector: "a", hash: true});
 
 const print = async (content, id = "") => {
     document.getElementById("content").innerHTML = await content.render(id);
@@ -69,10 +72,24 @@ router.on({
         print(ProductPage);
         
     },
+    "/products/sort/:min&:max": (value) => {
+        console.log(value.data);
+        
+        print(ProductSortPage,value.data);
+        
+    },
     "/products/:id": (value) =>{
         console.log(value.data.id);
         print(DetailProductsPage,value.data.id);
         
+    },
+    "/categoryProducts/:id": (value) =>{
+        console.log(value.data.id);
+        print(CategoryProductsPage,value.data.id);
+        
+    },
+    "/news": () =>{
+        print(NewsPage);
     },
     "/news/:id": (value) =>{
         console.log(value.data.id);

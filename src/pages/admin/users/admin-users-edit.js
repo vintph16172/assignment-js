@@ -1,7 +1,10 @@
 import AdminHeader from "../../../component/admin-header";
+import axios from "axios";
 import { get,update } from "../../../api/user"
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
+import $ from 'jquery';
+import validate from 'jquery-validation';
 
 const AdminUsersEdit = {
     
@@ -50,9 +53,9 @@ const AdminUsersEdit = {
                                 
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="country" class="block text-sm font-medium text-gray-700">Giới Tính:</label>
-                                                    <select id="user-gender" name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
+                                                    <select id="user-gender" name="user-gender" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
                                                     
-                                                    ${data.gender === 1 ? '<option value="1" >Nam</option><option value="0">Nữ</option>' : '<option value="0">Nữ</option><option value="1">Nam</option>'}
+                                                        ${data.gender === 1 ? '<option value="1" >Nam</option><option value="0">Nữ</option>' : '<option value="0">Nữ</option><option value="1">Nam</option>'}
                                                     
                                                     </select>
                                                 </div>
@@ -66,7 +69,7 @@ const AdminUsersEdit = {
                                 
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="country" class="block text-sm font-medium text-gray-700">Quyền Hạn:</label>
-                                                    <select id="user-permission" name="country" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
+                                                    <select id="user-permission" name="user-permission" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
                                                     
                                                     ${data.permission === 1 ? '<option value="1" >Admin</option><option value="0">Người Dùng</option>' : '<option value="0">Người Dùng</option><option value="1">Admin</option>'}
                                                     
@@ -91,7 +94,7 @@ const AdminUsersEdit = {
 
                                                     <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                                         <div class="space-y-1 text-center">
-                                                            <img src="${data.avatar}" alt="" class="mx-auto h-40 w-52 text-gray-400">
+                                                            <img id="img-preview" src="${data.avatar}" alt="" class="mx-auto h-40 w-52 text-gray-400">
                                                             
                                                             <div class="flex text-sm text-gray-600">
                                                                 <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
@@ -137,86 +140,189 @@ const AdminUsersEdit = {
     async afterRender(id) {
         AdminHeader.afterRender()
         const { data } = await get(id);
-        const formEdit = document.querySelector("#form-update");
+        const formEdit = $("#form-update");
         const imgPost = document.querySelector('#file-upload');
         const imgValue = document.querySelector('#file-upload').value;
-        
+        const imgPreview = document.querySelector('#img-preview');
 
+        let imgLink = "";
+
+        const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
+        const CLOUDINARY_PRESET = "ypn4yccr";
+
+        // preview image when upload
         imgPost.addEventListener('change', async (e) => {
-            
-            const file = e.target.files[0];
-            const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
-      
-            const formData = new FormData();
-      
-            formData.append('file', file);
-            formData.append('upload_preset', "ypn4yccr");
-      
-            // call api cloudinary
-          
-            const response = await axios.post(CLOUDINARY_API, formData, {
-              headers: {
-                "Content-Type": "application/form-data"
-              }
-            });
-            console.log(response.data.url);
-            
-            formEdit.addEventListener("submit",(b) =>{
-                b.preventDefault();
-                
-                update({
-                    id: id,
-                    username: document.querySelector('#user-name').value,
-                    email: document.querySelector('#user-email').value,
-                    borndate: document.querySelector('#user-borndate').value,
-                    gender: document.querySelector('#user-gender').value,
-                    phonenumber: document.querySelector('#user-phonenumber').value,
-                    permission: document.querySelector('#user-permission').value,
-                    address: document.querySelector('#user-address').value,
-                    avatar: response.data.url
-                    
-                })
-                toastr.success("Update Thành Công!")
-                
-                
-            })
-      
+            imgPreview.src = URL.createObjectURL(e.target.files[0]);
         });
-        if(imgValue === ""){
-            formEdit.addEventListener("submit",(b) =>{
-                b.preventDefault();
-                
-                update({
-                    id: id,
-                    username: document.querySelector('#user-name').value,
-                    email: document.querySelector('#user-email').value,
-                    borndate: document.querySelector('#user-borndate').value,
-                    gender: document.querySelector('#user-gender').value,
-                    phonenumber: document.querySelector('#user-phonenumber').value,
-                    permission: document.querySelector('#user-permission').value,
-                    address: document.querySelector('#user-address').value,
-                    avatar: data.avatar,
-                    password: "1234"
-                })
-              
-                const a = {
-                    id: id,
-                    username: document.querySelector('#user-name').value,
-                    email: document.querySelector('#user-email').value,
-                    borndate: document.querySelector('#user-borndate').value,
-                    gender: document.querySelector('#user-gender').value,
-                    phonenumber: document.querySelector('#user-phonenumber').value,
-                    permission: document.querySelector('#user-permission').value,
-                    address: document.querySelector('#user-address').value,
-                    avatar: data.avatar,
-                    password: data.password
+
+        formEdit.validate({
+            rules: {
+                "user-name": {
+                    required: true,
+                    minlength: 5
+                },
+                "user-email": {
+                    required: true,
+                    email: true
+                },
+                "user-borndate": {
+                    required: true
+                },
+                "user-gender": {
+                    required: true
+                },
+                "user-phonenumber": {
+                    required: true,
+                    minlength: 5
+                },
+                "user-permission": {
+                    required: true
+                },
+                "user-address": {
+                    required: true,
+                    minlength: 5
                 }
+            },
+            messages: {
+                "user-name": {
+                    required: "Không được để trống trường này!",
+                    minlength: "Nhập ít nhất 5 ký tự!"
+                },
+                "user-email": {
+                    required: "Không được để trống trường này!",
+                    email: "Nhập Đúng địa chỉ Email!"
+                },
+                "user-borndate": {
+                    required: "Không được để trống trường này!",
+                },
+                "user-gender": {
+                    required: "Không được để trống trường này!",
+                },
+                "user-phonenumber": {
+                    required: "Không được để trống trường này!",
+                    minlength: "Nhập ít nhất 5 ký tự!"
+                },
+                "user-permission": {
+                    required: "Không được để trống trường này!"
+                },
+                "user-address": {
+                    required: "Không được để trống trường này!",
+                    minlength: "Nhập ít nhất 5 ký tự!"
+                }
+            },
+            submitHandler: function () {
+                async function updateUser() {
+                    const file = imgPost.files[0];
+                    if (file) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+                        formData.append('upload_preset', CLOUDINARY_PRESET);
+
+                        // call api cloudinary
+
+                        const { data } = await axios.post(CLOUDINARY_API, formData, {
+                            headers: {
+                                "Content-Type": "application/form-data"
+                            }
+                        });
+                        imgLink = data.url;
+                    }
+                    update({
+                        id: id,
+                        username: document.querySelector('#user-name').value,
+                        email: document.querySelector('#user-email').value,
+                        borndate: document.querySelector('#user-borndate').value,
+                        gender: document.querySelector('#user-gender').value,
+                        phonenumber: document.querySelector('#user-phonenumber').value,
+                        permission: document.querySelector('#user-permission').value,
+                        address: document.querySelector('#user-address').value,
+                        avatar: imgLink ? imgLink : imgPreview.src,
+                        password: "1234"
+                        
+                    })
+                    toastr.success("Update Thành Công!")
+                }
+                updateUser();
+            }
+        });
+
+
+
+        // imgPost.addEventListener('change', async (e) => {
+            
+        //     const file = e.target.files[0];
+        //     const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
+      
+        //     const formData = new FormData();
+      
+        //     formData.append('file', file);
+        //     formData.append('upload_preset', "ypn4yccr");
+      
+        //     // call api cloudinary
+          
+        //     const response = await axios.post(CLOUDINARY_API, formData, {
+        //       headers: {
+        //         "Content-Type": "application/form-data"
+        //       }
+        //     });
+        //     console.log(response.data.url);
+            
+        //     formEdit.addEventListener("submit",(b) =>{
+        //         b.preventDefault();
                 
-                console.log(a);
-                toastr.success("Update Thành Công!")
+        //         update({
+        //             id: id,
+        //             username: document.querySelector('#user-name').value,
+        //             email: document.querySelector('#user-email').value,
+        //             borndate: document.querySelector('#user-borndate').value,
+        //             gender: document.querySelector('#user-gender').value,
+        //             phonenumber: document.querySelector('#user-phonenumber').value,
+        //             permission: document.querySelector('#user-permission').value,
+        //             address: document.querySelector('#user-address').value,
+        //             avatar: response.data.url
+                    
+        //         })
+        //         toastr.success("Update Thành Công!")
                 
-            })
-        }
+                
+        //     })
+      
+        // });
+        // if(imgValue === ""){
+        //     formEdit.addEventListener("submit",(b) =>{
+        //         b.preventDefault();
+                
+        //         update({
+        //             id: id,
+        //             username: document.querySelector('#user-name').value,
+        //             email: document.querySelector('#user-email').value,
+        //             borndate: document.querySelector('#user-borndate').value,
+        //             gender: document.querySelector('#user-gender').value,
+        //             phonenumber: document.querySelector('#user-phonenumber').value,
+        //             permission: document.querySelector('#user-permission').value,
+        //             address: document.querySelector('#user-address').value,
+        //             avatar: data.avatar,
+        //             password: "1234"
+        //         })
+              
+        //         const a = {
+        //             id: id,
+        //             username: document.querySelector('#user-name').value,
+        //             email: document.querySelector('#user-email').value,
+        //             borndate: document.querySelector('#user-borndate').value,
+        //             gender: document.querySelector('#user-gender').value,
+        //             phonenumber: document.querySelector('#user-phonenumber').value,
+        //             permission: document.querySelector('#user-permission').value,
+        //             address: document.querySelector('#user-address').value,
+        //             avatar: data.avatar,
+        //             password: data.password
+        //         }
+                
+        //         console.log(a);
+        //         toastr.success("Update Thành Công!")
+                
+        //     })
+        // }
         
         
     }

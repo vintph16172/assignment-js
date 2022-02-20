@@ -1,11 +1,16 @@
 import AdminHeader from "../../../component/admin-header";
 import axios from "axios";
 import { add } from "../../../api/post";
+import { getAllCatePost } from "../../../api/categoryNews"
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
+import $ from 'jquery';
+import validate from 'jquery-validation';
 
 const AdminNewsAdd = {
-    render() {
+    async render() {
+        const { data } = await getAllCatePost()
+        console.log(data);
         return /*html*/`
         ${AdminHeader.render()}
         
@@ -30,12 +35,28 @@ const AdminNewsAdd = {
                                             <div class="grid grid-cols-6 gap-6">
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="first-name" class="block text-sm font-medium text-gray-700">Tiêu Đề:</label>
-                                                    <input type="text" name="first-name" id="post-title" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md">
+                                                    <input type="text" name="post-title" id="post-title" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md">
                                                 </div>
                                 
                                                 <div class="col-span-6 sm:col-span-3">
                                                     <label for="first-name" class="block text-sm font-medium text-gray-700">Ngày Đăng:</label>
-                                                    <input type="date" name="first-name" id="post-createtime" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md">
+                                                    <input type="date" name="post-createtime" id="post-createtime" autocomplete="given-name" class="h-8 mt-1 focus:ring-[#0066B3] focus:border-[#0066B3] block w-full shadow-sm sm:text-sm border-[#0066B3] rounded-md">
+                                                </div>
+
+                                                <div class="col-span-6 sm:col-span-3">
+                                                    <label for="first-name" class="block text-sm font-medium text-gray-700">Danh Mục:</label>
+                                                    <select id="post-category" name="post-category" autocomplete="country-name" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-[#0066B3] sm:text-sm">
+
+                                                        ${data.map((category) => {
+                                                            return /*html*/`<option value="${category.id}" >${category.categoryName}</option>`
+
+
+
+                                                        })}
+                                                        
+                                                        
+                                                    
+                                                    </select>
                                                 </div>
                                 
                                                 
@@ -51,9 +72,7 @@ const AdminNewsAdd = {
 
                                                     <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                                                         <div class="space-y-1 text-center">
-                                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                            </svg>
+                                                            <img id="img-preview" class="mx-auto h-40 w-52 text-gray-400" src="http://2.bp.blogspot.com/-MowVHfLkoZU/VhgIRyPbIoI/AAAAAAAATtI/fHk-j_MYUBs/s640/placeholder-image.jpg" />
                                                             
                                                             <div class="flex text-sm text-gray-600">
                                                                 <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
@@ -76,7 +95,7 @@ const AdminNewsAdd = {
                                                         Nội Dung:
                                                     </label>
                                                     <div class="mt-1">
-                                                        <textarea id="post-detail" name="about" rows="3" class="h-32 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="..."></textarea>
+                                                        <textarea id="post-detail" name="post-detail" rows="3" class="h-32 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="..."></textarea>
                                                     </div>
                                                     
                                                 </div>
@@ -107,48 +126,109 @@ const AdminNewsAdd = {
         `;
     },
 
-    afterRender(){
+    afterRender() {
         AdminHeader.afterRender()
-        const formAdd = document.querySelector("#form-add");
+        const formAdd = $("#form-add");
         const imgPost = document.querySelector('#file-upload');
+        const imgPreview = document.querySelector('#img-preview');
 
+        const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
+        const CLOUDINARY_PRESET = "ypn4yccr";
+
+        let imgLink = "";
+
+        // preview image when upload
         imgPost.addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
-      
-            const formData = new FormData();
-      
-            formData.append('file', file);
-            formData.append('upload_preset', "ypn4yccr");
-      
-            // call api cloudinary
-          
-            const response = await axios.post(CLOUDINARY_API, formData, {
-              headers: {
-                "Content-Type": "application/form-data"
-              }
-            });
-            console.log(response.data.url);
-      
-      
-            formAdd.addEventListener("submit",(b) =>{
-                b.preventDefault();
-                console.log("submited");
-                add({
-                    title: document.querySelector('#post-title').value,
-                    img: response.data.url,
-                    
-                    desc:document.querySelector('#post-detail').value
-                  });
-                  toastr.success('Thêm Thành Công!')
-            })
-          });
+            imgPreview.src = URL.createObjectURL(e.target.files[0]);
+        });
 
-            
+        formAdd.validate({
+            rules: {
+                "post-title": {
+                    required: true,
+                    minlength: 5
+                },
+                "post-detail": {
+                    required: true,
+                    minlength: 5
+                }
+            },
+            messages: {
+                "post-title": {
+                    required: "Không được để trống trường này!",
+                    minlength: "Nhập ít nhất 5 ký tự!"
+                },
+                "post-detail": {
+                    required: "Không được để trống trường này!",
+                    minlength: "Nhập ít nhất 5 ký tự!"
+                }
+            },
+            submitHandler: function () {
+                async function addPost() {
+                    const file = imgPost.files[0];
+                    if (file) {
+                        const formData = new FormData();
+                        formData.append('file', file);
+                        formData.append('upload_preset', CLOUDINARY_PRESET);
+
+                        // call api cloudinary
+
+                        const { data } = await axios.post(CLOUDINARY_API, formData, {
+                            headers: {
+                                "Content-Type": "application/form-data"
+                            }
+                        });
+                        imgLink = data.url;
+                    }
+                    add({
+                        title: document.querySelector('#post-title').value,
+                        categoryPostId: document.querySelector('#post-category').value,
+                        img: imgLink ? imgLink : "",
+                        desc: document.querySelector('#post-detail').value
+                    });
+                    toastr.success('Thêm Thành Công!')
+                }
+                addPost();
+            }
+        });
+
+        // imgPost.addEventListener('change', async (e) => {
+        //     const file = e.target.files[0];
+        //     const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/vintph16172/image/upload"
+
+        //     const formData = new FormData();
+
+        //     formData.append('file', file);
+        //     formData.append('upload_preset', "ypn4yccr");
+
+        //     // call api cloudinary
+
+        //     const response = await axios.post(CLOUDINARY_API, formData, {
+        //       headers: {
+        //         "Content-Type": "application/form-data"
+        //       }
+        //     });
+        //     console.log(response.data.url);
+
+
+        //     formAdd.addEventListener("submit",(b) =>{
+        //         b.preventDefault();
+        //         console.log("submited");
+        //         add({
+        //             title: document.querySelector('#post-title').value,
+        //             img: response.data.url,
+
+        //             desc:document.querySelector('#post-detail').value
+        //           });
+        //           toastr.success('Thêm Thành Công!')
+        //     })
+        //   });
 
 
 
-        
+
+
+
     }
 
 }

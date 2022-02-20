@@ -16,12 +16,13 @@ const CartPage = {
         let cart = [];
         let totalProduct = 0
         let totalCart = 0
-        let shipping = 30000
+        let shipping = 0
         if (localStorage.getItem('cart')) {
             cart = JSON.parse(localStorage.getItem('cart'));
             cart.forEach((product) => {
                 totalProduct += product.price * product.quantity
             })
+            shipping = 30000
             totalCart = totalProduct + (totalProduct*0.05) +  shipping
             if(localStorage.getItem('coupon')){
                 totalCart = (totalProduct + (totalProduct*0.05) +  shipping)*(localStorage.getItem('coupon')/100)
@@ -114,8 +115,8 @@ const CartPage = {
 
 
                 `).join("") : `
-                    <tr>
-                        <td colspan="5">No record</td>
+                    <tr class="flex justify-center">
+                        <td class="text-center" colspan="6">No record</td>
                     </tr>
                 `}
                 
@@ -245,7 +246,8 @@ const CartPage = {
         $("#payment").addEventListener("click",(a)=>{
             a.preventDefault();
             toastr.success("Thanh Toán Thành Công!")
-            
+            localStorage.removeItem("cart")
+            localStorage.removeItem("coupon")
             window.location.assign("/")
         })
         $("#form-coupon").addEventListener("submit", async (e)=>{
@@ -263,13 +265,15 @@ const CartPage = {
                 reRender(CartPage, "#content");
             }
         })
-        $("#remove-coupon").addEventListener("click",(b)=>{
+        if(document.querySelector("#remove-coupon")){
+          $("#remove-coupon").addEventListener("click",(b)=>{
             b.preventDefault();
             localStorage.removeItem("coupon")
             toastr.success("Xóa Code Giảm Giá Thành Công!")
+            reRender(CartPage, "#content");
 
-
-        })
+          })
+        }
 
 
         $(".btn2").forEach(btn => {

@@ -1,11 +1,11 @@
 import instance from "./config";
 
 export const getAll = () => {
-    const url = `/posts`;
+    const url = `/posts/?_expand=categoryPost`;
     return instance.get(url);
 }
 export const get = (id) => {
-    const url = `/posts/${id}`;
+    const url = `/posts/${id}?_expand=categoryPost`;
     return instance.get(url);
 }
 export const add = (post) => {

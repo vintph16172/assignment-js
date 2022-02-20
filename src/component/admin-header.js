@@ -17,15 +17,19 @@ const AdminHeader = {
                     <div class="hidden md:block">
                         <div class="ml-8 flex items-baseline space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="/admin/dashbroad" class="header-link text-white hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
+                        <a href="/#/admin/dashbroad" class="header-link text-white hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
 
-                        <a href="/admin/news" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Bài Viết</a>
+                        <a href="/#/admin/products" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Sản Phẩm</a>
 
-                        <a href="/admin/users" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Tài Khoản</a>
+                        <a href="/#/admin/news" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Bài Viết</a>
 
-                        <a href="/" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+                        <a href="/#/" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Danh Mục Sản Phẩm</a>
 
-                        <a href="/" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Reports</a>
+                        <a href="/#/admin/users" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Tài Khoản</a>
+
+                        
+
+                        
                         </div>
                     </div>
                 </div>

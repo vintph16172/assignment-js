@@ -11,10 +11,12 @@ import { $ } from "../../utils/selector";
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
 
-const ProductPage = {
-  async render() {
-    const { data } = await getAllWithCate();
+const CategoryProductsPage = {
+  async render(id) {
+    const { data } = await getAllByID(id);
     const data2 = await getAllCateProduct();
+    const dataProduct = await getAllWithCate();
+    console.log(dataProduct);
     console.log(data);
     console.log(data2);
     const arrPrice = [
@@ -27,10 +29,10 @@ const ProductPage = {
 
     const arrNewProduct = []
         for (let y = 1; y <= 3; y++) {
-            arrNewProduct.push(data[data.length - y])
+            arrNewProduct.push(dataProduct.data[dataProduct.data.length - y])
         }
         console.log(arrNewProduct)
-    data.map((v)=>{
+        dataProduct.data.map((v)=>{
       arrPrice.map((i)=>{
           if((i.min < v.price) && (v.price <= i.max)){
               i.price_quantity = i.price_quantity + 1
@@ -159,7 +161,7 @@ const ProductPage = {
               
               <div class="relative m-3 grid grid-cols-4 mx-auto ">
 
-                ${data.map((product) =>/*html*/`
+                ${data.products.map((product) =>/*html*/`
                   
                       <div class=" relative max-w-sm  bg-white shadow-md rounded-3xl p-2 mx-1 my-3 cursor-pointer">
                       
@@ -292,7 +294,7 @@ const ProductPage = {
         console.log(data10);
         addToCart({ ...data10, quantity: 1 }, () => {
           toastr.success("Thêm thành công!");
-          reRender(ProductPage, "#content")
+          reRender(CategoryProductsPage, "#content")
         });
 
       });
@@ -301,4 +303,4 @@ const ProductPage = {
   }
 
 }
-export default ProductPage;
+export default CategoryProductsPage;
