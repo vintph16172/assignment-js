@@ -22,6 +22,7 @@ import AdminUsersEdit from "./pages/admin/users/admin-users-edit"
 import AdminProducts from "./pages/admin/products/admin-products"
 import AdminProductsEdit from "./pages/admin/products/admin-products-edit"
 import AdminProductsAdd from "./pages/admin/products/admin-products-add"
+import AdminCategoryProducts from "./pages/admin/categoryProducts/admin-categoryProducts";
 
 // -----BACK-END-------
 
@@ -72,6 +73,11 @@ router.on({
         print(ProductPage);
         
     },
+    "/products/pages/:page&:limit": (value) => {
+        console.log(value.data);
+        print(ProductPage,value.data);
+        
+    },
     "/products/sort/:min&:max": (value) => {
         console.log(value.data);
         
@@ -110,6 +116,9 @@ router.on({
     },
     "/admin/dashbroad": () => {
         print(AdminPage);
+    },
+    "/admin/categoryProducts": () => {
+        print(AdminCategoryProducts);
     },
     "/admin/products": () => {
         print(AdminProducts);

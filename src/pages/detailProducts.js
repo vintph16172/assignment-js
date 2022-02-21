@@ -3,7 +3,7 @@ import HeaderPage from "../component/header";
 import FooterPage from "../component/footer";
 import axios from "axios";
 import Cart from "../component/cart";
-import { addToCart } from "../../utils/cart";
+import { addToCart} from "../../utils/cart";
 import { get, getAllWithCate } from "../api/product"
 import { getAllCateProduct, getAllByID } from "../api/catagoryProducts";
 import { reRender } from "../../utils/reRender"
@@ -13,9 +13,13 @@ import "toastr/build/toastr.min.css";
 
 const DetailProductsPage = {
   async render(id) {
+    console.log(id);
     const { data } = await getAllWithCate();
+    console.log(data);
     const data2 = data.filter((product) => product.id == id)
+    console.log(data2);
     const data3 = data.filter((productRelate) => productRelate.categoryProductId == data2[0].categoryProductId)
+    console.log(data3);
     const data4 = []
     for(let i = 1; i <=4;i++){
       data4.push(data3[data3.length-i])
@@ -100,14 +104,17 @@ const DetailProductsPage = {
             <div class="mt-2">
               <label class="text-gray-700 text-sm" for="count">Số Lượng:</label>
               <div class="flex items-center mt-1">
-                <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+              
+                <button data-id="${data2[0].id}" class="btn2 btn-increase2 text-gray-500 focus:outline-none focus:text-gray-600">
                   <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                   </svg>
                 </button>
+
                 <input type="number" id="inputQty" class="border border-gray-400 p-3" value="1" />
-                <button class="text-gray-500 focus:outline-none focus:text-gray-600">
+
+                <button data-id="${data2[0].id}" class="btn2 btn-decrease2 text-gray-500 focus:outline-none focus:text-gray-600">
                   <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -126,11 +133,8 @@ const DetailProductsPage = {
               <button
               id="btnAddToCart" class="px-8 py-2 bg-indigo-600 text-white text-sm font-medium rounded hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500">Đặt Hàng</button>
               <button class="mx-2 text-gray-600 border rounded-md p-2 hover:bg-gray-200 focus:outline-none">
-                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  viewBox="0 0 24 24" stroke="currentColor">
-                  <path
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                  </path>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                 </svg>
               </button>
             </div>
@@ -189,6 +193,20 @@ const DetailProductsPage = {
         toastr.success("Thêm thành công!");
       });
     })
+    $(".btn2").forEach(btn => {
+      const id = btn.dataset.id;
+      btn.addEventListener('click', function () {
+          console.log(id);
+          if (btn.classList.contains('btn-increase2')) {
+            $("#inputQty").value++
+          } else if (btn.classList.contains('btn-decrease2')) {
+            $("#inputQty").value--
+          } 
+      })
+  })
+    
+
+
   }
 
 

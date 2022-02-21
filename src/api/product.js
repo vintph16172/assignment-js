@@ -4,6 +4,10 @@ export const getAll = () => {
     const url = `/products`;
     return instance.get(url);
 }
+export const getAllbyPage = (page,limit) => {
+    const url = `/products/?_page=${page}&_limit=${limit}`;
+    return instance.get(url);
+}
 export const getAllWithCate = () => {
     const url = `/products/?_expand=categoryProduct`;
     return instance.get(url);

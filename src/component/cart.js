@@ -8,9 +8,14 @@ import "toastr/build/toastr.min.css";
 const Cart = {
     render() {
         let cart = [];
+        let totalProduct = 0
         if (localStorage.getItem('cart')) {
             cart = JSON.parse(localStorage.getItem('cart'));
             console.log(cart);
+            cart.forEach((product) => {
+                totalProduct += product.price * product.quantity
+            })
+            console.log(totalProduct);
         }
         return /*html*/`
 
@@ -41,16 +46,16 @@ const Cart = {
                                     <thead class="bg-gray-50">
                                     <tr>
                                         <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tên
                                         </th>
                                         <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Danh Mục
                                         </th>
                                         <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Giá
                                         </th>
                                         <th scope="col"
-                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role
+                                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Số Lượng
                                         </th>
                                         <th scope="col" class="relative px-6 py-3">
                                         <span class="sr-only">Edit</span>
@@ -76,27 +81,43 @@ const Cart = {
                                             </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            <div class="text-sm text-gray-900">${item.categoryProductId}</div>
+                                            <div class="text-sm text-gray-900">${item.categoryProduct.categoryName}</div>
                                             <div class="text-sm text-gray-500"></div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-normal">
                                             <span
-                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                                ${item.status === 1 ?"Còn Hàng" : "Hết Hàng"} </span>
+                                                class="px-2 inline-flex text-xs leading-5 font-semibold rounded-fulltext-gray-900 ">
+                                                ${item.price} VNĐ </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-normal text-sm text-gray-500">
                                            
-                                            <input type="number" value="${item.quantity}" class="border border-gray-400 p-3" />
-                                            <button data-id="${item.id}" class="btn btn-increase inline-block p-3 bg-green-500 text-white">Tăng</button>
-                                            <button data-id="${item.id}" class="btn btn-decrease inline-block p-3 bg-orange-500 text-white">Giảm</button>
+                                            <div class="w-20 h-10">
+                                        
+                                                <div class="relative flex flex-row w-full h-8">
+                                                    <svg data-id="${item.id}" class="btn btn-decrease fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                                                        <path
+                                                        d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                                                    </svg>
+
+                                                    <input type="number" value="${item.quantity}"
+                                                    class="mx-2 w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
+                                                    
+                                                    <svg data-id="${item.id}" class="btn btn-increase fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                                                        <path
+                                                        d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                                                    </svg>
+                                                
+                                                </div>
+                                            </div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-normal text-right text-sm font-medium">
                                             <button data-id="${item.id}" class="btn btn-remove inline-block p-3 bg-red-500 text-white">Xóa</button>
                                         </td>
                                     </tr>
+
                                     `).join("") : `
-                                        <tr>
-                                            <td colspan="4">No record</td>
+                                        <tr class="flex justify-center">
+                                            <td class="text-center" colspan="4">Không Có Sản Phẩm Nào!</td>
                                         </tr>
                                     `}
 
@@ -111,10 +132,10 @@ const Cart = {
 
             <!-- Modal footer -->
             <div class="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
-           
-            <a href="/cart"> <button class="bg-[#0066B3] text-white px-4 py-2 rounded-md hover:bg-[#F26F1B] transition">Thanh Toán</button></a>
-            <button id="modal-close2"
-                class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-[#F26F1B] transition">Đóng</button>
+                <span class="" >Tổng Cộng: ${totalProduct} VNĐ</span>
+                <a href="/cart"> <button class="bg-[#0066B3] text-white px-4 py-2 rounded-md hover:bg-[#F26F1B] transition">Thanh Toán</button></a>
+                <button id="modal-close2"
+                    class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-[#F26F1B] transition">Đóng</button>
             </div>
         </div>
     </div>
@@ -150,7 +171,7 @@ const Cart = {
                     increaseQty(id, () => reRender(Cart, "#cart"));
                 } else if(btn.classList.contains('btn-decrease')){
                     decreaseQty(id, () => reRender(Cart, "#cart"));
-                } else if(btn.classList.contains('btn-decrease')) {
+                } else {
                     removeItemInCart(id, () => {
                         reRender(Cart, "#cart");
                         toastr.success("Bạn đã xóa thành công")

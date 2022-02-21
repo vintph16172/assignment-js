@@ -4,7 +4,7 @@ import HeaderPage from "../component/header";
 import FooterPage from "../component/footer";
 import Cart from "../component/cart";
 import { addToCart } from "../../utils/cart";
-import { get, getAll, getAllWithCate } from "../api/product";
+import { get, getAll, getAllWithCate,getAllbyPage } from "../api/product";
 import { getAllCateProduct, getAllByID } from "../api/catagoryProducts";
 import { reRender } from "../../utils/reRender"
 import { $ } from "../../utils/selector";
@@ -12,8 +12,23 @@ import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
 
 const ProductPage = {
-  async render() {
-    const { data } = await getAllWithCate();
+  async render(value) {
+    console.log(value);
+    async  function page(b){
+      let a =""
+      if(value){
+        a = await getAllbyPage(value.page,value.limit)
+        console.log(a);
+        return a;
+      }else{
+        a = await getAllWithCate()
+        console.log(a);
+        return a;
+      }
+      
+    }
+    const { data } = await page(value);
+    
     const data2 = await getAllCateProduct();
     console.log(data);
     console.log(data2);
@@ -214,34 +229,68 @@ const ProductPage = {
 
                 <nav aria-label="Page navigation example">
                   <ul class="inline-flex -space-x-px">
+                    
+                    ${value?/*html*/`
+                      ${(value.page-1 !==0)&&(value.page-2 ==0)?/*html*/`
+                        <li>
+                          <a href="/#/products/pages/${value.page-1}&${5}"
+                            class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                        </li>
+                        <li>
+                          <a href="/#/products/pages/${value.page-2}&${5}"
+                            class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">${value.page-2}</a>
+                        </li>
+                      
+                        <li>
+                          <a href="/#/products/pages/${value.page-1}&${5}"
+                            class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">${value.page-1}</a>
+                        </li>
+                      ` :""}
+                      <li>
+                        <a href="/#/products/pages/${value.page}&${5}" aria-current="page"
+                        class="bg-blue-50 border border-gray-300 text-blue-600 hover:bg-blue-100 hover:text-blue-700  py-2 px-3 dark:border-gray-700 dark:bg-gray-700 dark:text-white">${value.page}</a>
+                      </li>
+                      
+                      <li>
+                        <a href="/#/products/pages/${Number(value.page)+1}&${5}"
+                          class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">${Number(value.page)+1}</a>
+                      </li>
+                      <li>
+                        <a href="/#/products/pages/${Number(value.page)+2}&${5}"
+                          class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">${Number(value.page)+2}</a>
+                      </li>
+                      <li>
+                        <a href="/#/products/pages/${Number(value.page)+1}&${5}"
+                          class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                      </li>
+                    
+                    ` :/*html*/`
                     <li>
-                      <a href="#"
-                        class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 ml-0 rounded-l-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                    <a href="/#/products" aria-current="page"
+                      class="bg-blue-50 border rounded-l-lg border-gray-300 text-blue-600 hover:bg-blue-100 hover:text-blue-700  py-2 px-3 dark:border-gray-700 dark:bg-gray-700 dark:text-white">1</a>
                     </li>
                     <li>
-                      <a href="#"
-                        class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                    </li>
-                    <li>
-                      <a href="#"
+                      <a href="/#/products/pages/${2}&${5}"
                         class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
                     </li>
+                    
                     <li>
-                      <a href="#" aria-current="page"
-                        class="bg-blue-50 border border-gray-300 text-blue-600 hover:bg-blue-100 hover:text-blue-700  py-2 px-3 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+                      <a href="/#/products/pages/${3}&${5}"
+                        class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">3</a>
                     </li>
                     <li>
-                      <a href="#"
+                      <a href="/#/products/pages/${4}&${5}"
                         class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
                     </li>
                     <li>
-                      <a href="#"
-                        class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-                    </li>
-                    <li>
-                      <a href="#"
+                      <a href="/#/products/pages/${2}&${5}"
                         class="bg-white border border-gray-300 text-gray-500 hover:bg-gray-100 hover:text-gray-700 rounded-r-lg leading-tight py-2 px-3 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
                     </li>
+                    
+                    
+                    
+                    `}
+                    
                   </ul>
                 </nav>
 

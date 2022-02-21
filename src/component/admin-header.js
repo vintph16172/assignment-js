@@ -23,7 +23,7 @@ const AdminHeader = {
 
                         <a href="/#/admin/news" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Bài Viết</a>
 
-                        <a href="/#/" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Danh Mục Sản Phẩm</a>
+                        <a href="/#/admin/categoryProducts" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Danh Mục Sản Phẩm</a>
 
                         <a href="/#/admin/users" class="header-link text-gray-300 hover:bg-gray-700 hover:text-[#F26F1B] px-3 py-2 rounded-md text-sm font-medium">Tài Khoản</a>
 
@@ -148,7 +148,7 @@ const AdminHeader = {
         a.forEach((i)=>{
             let mm = i.href.split("/")
             const spil = window.location.href.split("/")
-            if(mm[4] === spil[4]){
+            if(mm[5] === spil[5]){
                 i.classList.add("bg-gray-900")
             }
         })

@@ -1,16 +1,15 @@
 import AdminHeader from "../../../component/admin-header";
-import { getAll, remove, update } from "../../../api/product"
-import { getAllCateProduct } from "../../../api/catagoryProducts"
+import { remove,getAllCateProduct } from "../../../api/catagoryProducts"
 import { reRender } from "../../../../utils/reRender"
 import toastr from 'toastr';
 import "toastr/build/toastr.min.css";
 
-const AdminProducts = {
+const AdminCategoryProducts = {
     async render() {
-        const { data } = await getAll();
-        const data2 = await getAllCateProduct();
+        const { data } = await getAllCateProduct();
+       
         console.log(data);
-        console.log(data2);
+        
 
 
         return /*html*/`
@@ -19,7 +18,7 @@ const AdminProducts = {
         <div class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                 <h1 class="text-3xl font-bold text-gray-900">
-                    Sản Phẩm
+                    Danh Mục Sản Phẩm
                 </h1>
             </div>
         </div>
@@ -43,7 +42,7 @@ const AdminProducts = {
                                             <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                             </svg>
-                                            <a href="/admin/products/add">Thêm Sản Phẩm</a>
+                                            <a href="/admin/categoryProducts/add">Thêm Danh Mục</a>
                                         </button>
                                             
 
@@ -54,24 +53,11 @@ const AdminProducts = {
                                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         ID
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Ảnh
-                                                        </th>
+                                                        
                                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                                         Tên 
                                                         </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Danh Mục
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Số Lượng
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Lượt Xem
-                                                        </th>
-                                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                        Trạng Thái
-                                                        </th>
+                                                        
                                                         
                                                         
                                                         <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -86,30 +72,11 @@ const AdminProducts = {
                                                                 <td class="px-4 py-4 whitespace-nowrap text-sm">
                                                                 ${products.id}
                                                             </td>
-                                                            <td class="px-4 py-4 whitespace-nowrap">
-                                                                <div class=" h-24 w-28">
-                                                                    <img class="h-24 w-28 " src="${products.image}" alt="">
-                                                                </div>
+                                                            
+                                                            <td class="px-4 py-4 whitespace-normal">
+                                                                <span class="text-sm text-gray-900">${products.categoryName}</span>
                                                             </td>
-                                                                <td class="px-4 py-4 whitespace-normal">
-                                                                <span class="text-sm text-gray-900">${products.name}</span>
-                                                            </td>
-                                                            </td>
-                                                                <td class="px-4 py-4 whitespace-normal">
-                                                                <span class="text-sm text-gray-900">${data2.data.map((category) => { if (category.id == products.categoryProductId) return category.categoryName })}</span>
-                                                            </td>
-                                                            </td>
-                                                                <td class="px-4 py-4 whitespace-normal">
-                                                                <span class="text-sm text-gray-900">${products.quantity_amount}</span>
-                                                            </td>
-                                                            </td>
-                                                                <td class="px-4 py-4 whitespace-normal">
-                                                                <span class="text-sm text-gray-900">${products.view}</span>
-                                                            </td>
-                                                            </td>
-                                                                <td class="px-4 py-4 whitespace-normal">
-                                                                <span class="text-sm text-gray-900">${products.status == 1 ? "Hoạt Động" : "Ẩn"}</span>
-                                                            </td>
+                                                            
                                                             
                                                             
                                                                
@@ -119,7 +86,7 @@ const AdminProducts = {
                                                                 
                                                                 
 
-                                                                ${products.status == 0 ? /*html*/`<button type="submit" data-id="${products.id}" class="btn-permission-up bg-blue-600 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  hover:bg-[#F26F1B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F26F1B]" ><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" /></svg></button>` : /*html*/`<button type="submit" data-id="${products.id}" class="btn-permission-down bg-blue-600 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white  hover:bg-[#F26F1B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F26F1B]" ><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg></button>`}
+                                                                
                                                                 
                                                                 
                                                                 
@@ -186,72 +153,14 @@ const AdminProducts = {
                 if (confirm) {
                     remove(id)
                         .then(() => toastr.success('Bạn đã xóa thành công'))
-                        .then(() => { reRender(AdminProducts, "#content") })
+                        .then(() => { reRender(AdminCategoryProducts, "#content") })
 
                 }
 
             });
         });
 
-        btns_permisson_up.forEach((buttonElement) => {
-            const id = buttonElement.dataset.id;
-
-
-            buttonElement.addEventListener("click", () => {
-                const data10 = data.filter((product) => product.id == id)
-                console.log(data10);
-
-                console.log(id);
-                const confirm = window.confirm("Bạn Kích Hoạt Sản Phẩm hay không?");
-                if (confirm) {
-                    update({
-                        id: id,
-                        categoryProductId: data10[0].categoryProductId,
-                        name: data10[0].name,
-                        image: data10[0].image,
-                        price: data10[0].price,
-                        quantity_amount: data10[0].quantity_amount,
-                        desc: data10[0].desc,
-                        view: data10[0].view,
-                        status: "1"
-                    })
-                        .then(() => toastr.success('Bạn đã Kích Hoạt Sản Phẩm thành công'))
-                        .then(() => { reRender(AdminProducts, "#content") })
-
-                }
-
-            });
-        });
-
-        btns_permisson_down.forEach((buttonElement) => {
-            const id = buttonElement.dataset.id;
-
-
-            buttonElement.addEventListener("click", () => {
-                const data10 = data.filter((product) => product.id == id)
-                console.log(data10);
-
-                console.log(id);
-                const confirm = window.confirm("Bạn có muốn Ẩn Sản Phẩm hay không?");
-                if (confirm) {
-                    update({
-                        id: id,
-                        categoryProductId: data10[0].categoryProductId,
-                        name: data10[0].name,
-                        image: data10[0].image,
-                        price: data10[0].price,
-                        quantity_amount: data10[0].quantity_amount,
-                        desc: data10[0].desc,
-                        view: data10[0].view,
-                        status: "0"
-                    })
-                        .then(() => toastr.success('Bạn đã Ẩn Sản Phẩm thành công'))
-                        .then(() => { reRender(AdminProducts, "#content") })
-
-                }
-
-            });
-        });
+        
 
 
 
@@ -259,4 +168,4 @@ const AdminProducts = {
 
 }
 
-export default AdminProducts;
+export default AdminCategoryProducts;

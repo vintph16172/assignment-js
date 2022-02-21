@@ -79,22 +79,22 @@ const CartPage = {
                             </a>
                         </td>
                         <td class="justify-center md:justify-center md:flex mt-6">
-                            <div class="w-20 h-10">
+                          <div class="w-20 h-10">
                                     
-                                <div class="relative flex flex-row w-full h-8">
-                                    <svg data-id="${item.id}" class="btn2 btn-decrease2 fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-                                        <path
-                                        d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                                    </svg>
-                                    <input type="number" value="${item.quantity}"
-                                    class="mx-2 w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
-                                    <svg data-id="${item.id}" class="btn2 btn-increase2 fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-                                        <path
-                                        d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
-                                    </svg>
-                                
-                                    </div>
+                            <div class="relative flex flex-row w-full h-8">
+                                <svg data-id="${item.id}" class="btn2 btn-decrease2 fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                                    <path
+                                    d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                                </svg>
+                                <input type="number" value="${item.quantity}"
+                                class="mx-2 w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black" />
+                                <svg data-id="${item.id}" class="btn2 btn-increase2 fill-current text-gray-600 w-3" viewBox="0 0 448 512">
+                                    <path
+                                    d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z" />
+                                </svg>
+                            
                             </div>
+                          </div>
                         </td>
                         <td class="hidden text-center md:table-cell">
                         <span class="text-sm lg:text-base font-medium">
@@ -116,7 +116,7 @@ const CartPage = {
 
                 `).join("") : `
                     <tr class="flex justify-center">
-                        <td class="text-center" colspan="6">No record</td>
+                        <td class="text-center" colspan="6">Không Có Sản Phẩm Nào!</td>
                     </tr>
                 `}
                 

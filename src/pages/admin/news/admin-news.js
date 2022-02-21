@@ -144,12 +144,12 @@ const AdminNews = {
         btns.forEach((buttonElement) => {
             const id = buttonElement.dataset.id;
             buttonElement.addEventListener("click", () => {
-                // const confirm = window.confirm("Bạn có muốn xóa hay không?");
-                // if(confirm){
-                //   remove(id)
-                //     .then(() => toastr.success('Bạn đã xóa thành công'))
-                //     .then(()=>{reRender(AdminNews , "#content") })     
-                // }
+                const confirm = window.confirm("Bạn có muốn xóa hay không?");
+                if(confirm){
+                  remove(id)
+                    .then(() => toastr.success('Bạn đã xóa thành công'))
+                    .then(()=>{reRender(AdminNews , "#content") })     
+                }
                 console.log(id);
                 
             });

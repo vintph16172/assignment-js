@@ -2,7 +2,7 @@
   "categoryPosts": [
     {
       "id": 1,
-      "categoryName": "Thông Tin"
+      "categoryName": "Tin Tức Học Tập"
     },
     {
       "id": 2,
@@ -72,7 +72,7 @@
     },
     {
       "id": 7,
-      "categoryPostId": 2,
+      "categoryPostId": 4,
       "title": "Rodney ",
       "img": "http://res.cloudinary.com/vintph16172/image/upload/v1645364423/zvoodzaensqcnkto7j5q.jpg",
       "author": "vintph16172",
@@ -80,7 +80,7 @@
     },
     {
       "id": 8,
-      "categoryPostId": 2,
+      "categoryPostId": 4,
       "title": "Rodney ",
       "img": "http://res.cloudinary.com/vintph16172/image/upload/v1645364423/zvoodzaensqcnkto7j5q.jpg",
       "author": "vintph16172",
@@ -104,15 +104,7 @@
     },
     {
       "id": 11,
-      "categoryPostId": 1,
-      "title": "Rodney ",
-      "img": "http://res.cloudinary.com/vintph16172/image/upload/v1645364423/zvoodzaensqcnkto7j5q.jpg",
-      "author": "vintph16172",
-      "desc": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles"
-    },
-    {
-      "id": 12,
-      "categoryPostId": 1,
+      "categoryPostId": 4,
       "title": "Rodney ",
       "img": "http://res.cloudinary.com/vintph16172/image/upload/v1645364423/zvoodzaensqcnkto7j5q.jpg",
       "author": "vintph16172",
@@ -121,8 +113,9 @@
     {
       "id": 13,
       "title": "ấcfsfsdfdsf",
-      "categoryPostId": "1",
+      "categoryPostId": 1,
       "img": "http://res.cloudinary.com/vintph16172/image/upload/v1645372279/hrpg2ihx1eqivtus5wlt.jpg",
+      "author": "vintph16172",
       "desc": "ádsafsfsdffdg"
     }
   ],
@@ -145,12 +138,12 @@
       "id": 1,
       "categoryProductId": 1,
       "name": "Áo Poly",
+      "image": "https://picsum.photos/200/200",
       "price": "200000",
       "quantity_amount": 1,
+      "desc": "abc",
       "view": "1111",
-      "status": 0,
-      "image": "https://picsum.photos/200/200",
-      "desc": "abc"
+      "status": "0"
     },
     {
       "id": 2,
@@ -161,7 +154,7 @@
       "quantity_amount": 1,
       "desc": "abc",
       "view": "222",
-      "status": 1
+      "status": "1"
     },
     {
       "id": 3,
@@ -220,23 +213,45 @@
     },
     {
       "id": 8,
-      "categoryProductId": "1",
+      "categoryProductId": 1,
       "name": "Áo Poly",
       "price": "200000",
-      "quantity_amount": "1",
+      "quantity_amount": 1,
       "view": "888",
-      "status": "1",
+      "status": 1,
       "image": "http://res.cloudinary.com/vintph16172/image/upload/v1645369993/l9p5s45ayplk0knh1z5n.jpg",
       "desc": "abc12345"
     },
     {
       "id": 9,
-      "categoryProductId": "2",
-      "name": "abc12345",
+      "categoryProductId": 2,
+      "name": "Quần",
       "price": "400000",
-      "quantity_amount": "1",
+      "quantity_amount": 1,
       "view": "122",
-      "status": "0",
+      "status": 0,
+      "image": "http://res.cloudinary.com/vintph16172/image/upload/v1645017247/tu4vjyz5innp5f800hvw.jpg",
+      "desc": "abc12345"
+    },
+    {
+      "id": 10,
+      "categoryProductId": 2,
+      "name": "Quần",
+      "price": "400000",
+      "quantity_amount": 1,
+      "view": "122",
+      "status": 0,
+      "image": "http://res.cloudinary.com/vintph16172/image/upload/v1645017247/tu4vjyz5innp5f800hvw.jpg",
+      "desc": "abc12345"
+    },
+    {
+      "id": 11,
+      "categoryProductId": 2,
+      "name": "Quần",
+      "price": "400000",
+      "quantity_amount": 1,
+      "view": "122",
+      "status": 0,
       "image": "http://res.cloudinary.com/vintph16172/image/upload/v1645017247/tu4vjyz5innp5f800hvw.jpg",
       "desc": "abc12345"
     }
